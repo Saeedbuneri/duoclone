@@ -52,7 +52,7 @@ if (loader) {
   setTimeout(() => {
     loader.style.opacity = '0';
     setTimeout(() => loader.remove(), 400);
-  }, 500); // 500ms startup delay
+  }, 3000); // 3000ms startup delay (3 seconds)
 }
 
 // Expose router globally for navigation
