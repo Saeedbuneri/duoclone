@@ -16,6 +16,7 @@ import { LettersPage } from './pages/letters';
 import { SuperPage } from './pages/super';
 import { AboutPage, BlogPage, StorePage, EfficacyPage, CareersPage, InvestorsPage, TermsPage, PrivacyPage } from './pages/info';
 import { AppState } from './state';
+import { playSound } from './audio';
 
 // Initialize global state
 AppState.init();
@@ -190,3 +191,15 @@ if (loader) {
   `;
   setTimeout(() => (document.getElementById(inputId) as HTMLInputElement)?.focus(), 50);
 };
+
+// Global click effects
+document.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+  // Generic button/nav click sound
+  const clickable = target.closest('button, .nav-item, a.btn');
+  const isLessonOption = target.closest('.lesson-option, .word-chip'); // handled by lesson.ts explicitly
+  const isCheckBtn = target.closest('#check-btn'); // handled by lesson.ts explicitly 
+  if (clickable && !isLessonOption && !isCheckBtn) {
+    playSound('click');
+  }
+});

@@ -1,0 +1,22 @@
+H1: About Us
+H2: Our teaching approach
+P: We believe that anyone can learn a language with Duolingo. Our free, bite-size lessons feel more like a game than a textbook, and that's by design: Learning is easier when you're having fun.
+P: But Duolingo isn't just a game. It's based on a methodology proven to foster long-term retention, and a curriculum aligned to an international standard. Let's explore how language learning happens with Duolingo!
+H2: Real-life communication
+P: Language is ultimately a communication tool. Duolingo takes a functional approach by focusing on what learners actually want to do with a language.
+P: Lessons focus on a real-life goal — for instance, ordering at a restaurant. Learners develop the vocabulary and grammar needed to achieve that goal through lots of varied practice in reading, writing, listening, and speaking.
+H2: Standout content
+P: Along with commonly used phrases like "¿Dónde está el baño?" (Where is the bathroom?), Duolingo learners also encounter sentences like "Tu oso bebe cerveza" (Your bear drinks beer).
+P: Why the quirky sentences? They're memorable and more fun to learn. Our unexpected content also pushes learners to think carefully about the language they're learning.
+H2: A balanced approach
+P: Duolingo allows learners to discover patterns on their own without needing to focus on language rules — the same way you learned your first language as a child. This approach, called "implicit learning," is ideal for developing a strong foundational knowledge of a language and its rules.
+P: But explicit instruction is useful for some concepts. So Duolingo offers both! In addition to lessons, learners can access Tips for explanations on grammar, pronunciation, and helpful phrases.
+H2: Personalization
+P: With over 500 million learners, you’d think personalized instruction would be tough to pull off. But we’re up for the challenge! Machine learning algorithms are always at work to serve up learning material at just the right difficulty level for each learner.
+H2: Many ways to learn
+P: Learners benefit from varied exposure to language. That's why we offer learning experiences like interactive stories and podcasts.
+P: These additional formats help learners with interaction, conversation, and reading and listening comprehension — all valuable skills for real-world language practice!
+H2: Continuous improvement
+P: At Duolingo, we're committed to improvement. Test questions are embedded throughout our courses to measure how learners are progressing — and to show where Duolingo can improve.
+P: We use the results to develop new and better courses, expand our universe of language-learning tools, update our materials as languages evolve, and ensure we're continuing to offer the best language education in the world. Like language, we never stand still.
+P: Have questions? Contact us or visit the Making Duolingo blog.

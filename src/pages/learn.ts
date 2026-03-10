@@ -1,12 +1,14 @@
 import { AppLayout, RightPanelWidgets, DuoMascotPath } from '../components';
 import { AppState } from '../state';
 import { icons } from '../icons';
+import { getGuideData } from '../guideData';
 
 interface PathNode {
   id: number;
   name: string;
   status: string;
   type: 'lesson' | 'chest' | 'trophy';
+  globalIdx?: number;
 }
 
 interface Unit {
@@ -38,10 +40,15 @@ function generateUnitsForLanguage(langName: string): Unit[] {
   const colors = ['#58CC02', '#CE82FF', '#1CB0F6', '#FF9600', '#FF4B4B', '#00CD9C'];
 
   let globalId = 1;
-  return genericTitles.map((title, unitIdx) => {
+  return Array.from({ length: 30 }).map((_, unitIdx) => {
     const section = Math.floor(unitIdx / 4) + 1;
     const isFirstInSection = unitIdx % 4 === 0;
-    const nodeNames = genericNodes[unitIdx];
+
+    const baseTitle = genericTitles[unitIdx % genericTitles.length];
+    const loopNum = Math.floor(unitIdx / genericTitles.length) + 1;
+    const title = loopNum > 1 ? `${baseTitle} (Part ${loopNum})` : baseTitle;
+
+    const nodeNames = genericNodes[unitIdx % genericNodes.length];
 
     return {
       section,
@@ -96,6 +103,7 @@ export function LearnPage() {
       if (globalIdx < completed) node.status = 'completed';
       else if (globalIdx === completed) node.status = 'active';
       else node.status = 'locked';
+      node.globalIdx = globalIdx;
       globalIdx++;
     });
   });
@@ -145,7 +153,7 @@ export function LearnPage() {
           <div class="start-popup" id="popup-${node.id}">
             <h4>${node.name}</h4>
             <p>Lesson ${i + 1} of ${unit.nodes.length}</p>
-            <button class="btn btn-full" onclick="window.__router.navigate('/lesson')" style="background: white; color: var(--duo-green); box-shadow: 0 4px 0 #E5E5E5; border: none; font-weight: 800; font-size: 15px;">
+            <button class="btn btn-full" onclick="startLesson(${node.globalIdx})" style="background: white; color: var(--duo-green); box-shadow: 0 4px 0 #E5E5E5; border: none; font-weight: 800; font-size: 15px;">
               ${node.status === 'completed' ? 'PRACTICE' : 'START +10 XP'}
             </button>
           </div>` : ''}
@@ -165,66 +173,60 @@ export function LearnPage() {
         const container = document.getElementById('global-modals');
         if (!container) return;
 
-        const guideData: Record<number, any> = {
-          1: {
-            phrases: [
-              { term: 'Hello!', type: 'Greeting' },
-              { term: 'Thank you very much.', type: 'Polite Phrase' },
-              { term: 'See you later.', type: 'Farewell' }
-            ],
-            grammar: 'In this unit, focus on memorizing the patterns! Nouns often have genders, and verbs might change endings depending on who defaults the action. Tap words in lessons to see hints!'
-          },
-          2: {
-            phrases: [
-              { term: 'I would like a coffee.', type: 'Ordering Food' },
-              { term: 'Where is the bathroom?', type: 'Question' },
-              { term: 'The check, please.', type: 'Restaurant' }
-            ],
-            grammar: 'When asking questions, the verb often moves to the front of the sentence. Keep an eye out for question marks at the beginning of sentences in some languages like Spanish (¿)!'
-          },
-          3: {
-            phrases: [
-              { term: 'My name is...', type: 'Introduction' },
-              { term: 'Nice to meet you.', type: 'Greeting' },
-              { term: 'I am from...', type: 'Origin' }
-            ],
-            grammar: 'Pay attention to formal vs. informal pronouns (like "tú" vs "usted" in Spanish or "tu" vs "vous" in French). Use formal when speaking to strangers or elders.'
-          },
-          4: {
-            phrases: [
-              { term: 'How much does this cost?', type: 'Shopping' },
-              { term: 'Do you have this in blue?', type: 'Colors' },
-              { term: 'It is too expensive.', type: 'Bargaining' }
-            ],
-            grammar: 'Adjectives often change to match the gender and number of the noun they describe. For example, a red apple might be "manzana roja" but a red car is "coche rojo".'
-          }
-        };
-
-        const data = guideData[((unit - 1) % 4) + 1];
+        const lang = AppState.user.language || 'Spanish';
+        const data = getGuideData(lang, unit);
 
         const content = `
-          <div class="top-modal animate-in" style="animation-duration: 0.2s; top: 10%; right: auto; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; padding: 0; overflow: hidden;">
-            <div style="background: ${color}; padding: 24px; color: white;">
-              <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">Unit ${unit} Guidebook</h2>
-              <p style="font-size: 16px; font-weight: 700; opacity: 0.9;">${title}</p>
+          <div class="top-modal animate-in" style="animation-duration: 0.2s; top: 10%; right: auto; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; padding: 0; overflow-y: auto; max-height: 80vh; border-radius: 20px;">
+            <div style="background: ${color}; padding: 32px 24px; color: white;">
+              <div style="display:flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">Unit ${unit} Guidebook</h2>
+                  <p style="font-size: 18px; font-weight: 700; opacity: 0.9;">${title}</p>
+                </div>
+                <button onclick="document.getElementById('global-modals').innerHTML=''" style="background: rgba(255,255,255,0.2); border: none; color: white; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 800;">✕</button>
+              </div>
             </div>
+            
             <div style="padding: 24px;">
-              <h3 style="color: #4B4B4B; font-size: 18px; font-weight: 800; margin-bottom: 12px;">Key Phrases</h3>
-              <div style="background: #F7F7F7; border: 2px solid #E5E5E5; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
-                ${data.phrases.map((p: any, i: number) => `
-                <p style="font-size: 16px; color: #4B4B4B; font-weight: 700; display: flex; justify-content: space-between; align-items: center; ${i < data.phrases.length - 1 ? 'border-bottom: 2px solid #E5E5E5; padding-bottom: 12px; margin-bottom: 12px;' : ''}">
-                  <span>${p.term}</span> <span style="color: #AFAFAF; font-size: 14px;">(${p.type})</span>
-                </p>`).join('')}
+              <!-- Section 1: Key Phrases -->
+              <h3 style="color: #4B4B4B; font-size: 19px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 24px;">🗣️</span> Key Phrases
+              </h3>
+              <div style="background: white; border: 2px solid #E5E5E5; border-radius: 16px; padding: 8px; margin-bottom: 24px; box-shadow: 0 4px 0 #E5E5E5;">
+                ${data.phrases.map((p, i) => `
+                <div style="padding: 16px; ${i < data.phrases.length - 1 ? 'border-bottom: 2px solid #F0F0F0;' : ''}">
+                  <div style="font-size: 17px; color: #4B4B4B; font-weight: 800;">${p.native}</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                    <span style="color: #777; font-size: 15px; font-weight: 600;">${p.trans}</span>
+                    <span style="background: #E5E5E5; color: #777; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 99px;">${p.type.toUpperCase()}</span>
+                  </div>
+                </div>`).join('')}
               </div>
               
-              <h3 style="color: #4B4B4B; font-size: 18px; font-weight: 800; margin-bottom: 12px;">Grammar Tip</h3>
-              <div style="background: #DDF4FF; border: 2px solid #1CB0F6; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
-                <p style="font-size: 15px; color: #1899D6; line-height: 1.5; font-weight: 600;">
+              <!-- Section 2: Grammar Tips -->
+              <h3 style="color: #4B4B4B; font-size: 19px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 24px;">💡</span> Grammar Tip
+              </h3>
+              <div style="background: #DDF4FF; border: 2px solid #1CB0F6; border-radius: 16px; padding: 20px; margin-bottom: 24px; position: relative;">
+                <p style="font-size: 16px; color: #1899D6; line-height: 1.6; font-weight: 600; margin: 0;">
                   ${data.grammar}
                 </p>
               </div>
+
+              ${data.culture ? `
+              <!-- Section 3: Cultural Note -->
+              <h3 style="color: #4B4B4B; font-size: 19px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 24px;">🌎</span> Cultural Note
+              </h3>
+              <div style="background: #FFF4D1; border: 2px solid #FFC800; border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+                <p style="font-size: 16px; color: #C67600; line-height: 1.6; font-weight: 600; margin: 0;">
+                  ${data.culture}
+                </p>
+              </div>
+              ` : ''}
               
-              <button class="btn btn-green btn-full" onclick="document.getElementById('global-modals').innerHTML=''">GOT IT</button>
+              <button class="btn btn-green btn-full" onclick="document.getElementById('global-modals').innerHTML=''" style="height: 50px; font-size: 17px;">GOT IT</button>
             </div>
           </div>
         `;
@@ -233,6 +235,11 @@ export function LearnPage() {
           <div class="modal-backdrop" onclick="document.getElementById('global-modals').innerHTML=''"></div>
           ${content}
         `;
+      };
+
+      (window as any).startLesson = (idx: number) => {
+        sessionStorage.setItem('targetLessonIdx', idx.toString());
+        window.__router.navigate('/lesson');
       };
 
       (window as any).togglePopup = (id: number) => {

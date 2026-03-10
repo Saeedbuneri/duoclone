@@ -1,0 +1,99 @@
+CONSOLE: [vite] connecting...
+CONSOLE: [vite] connected.
+URL: http://localhost:5173/lesson
+HTML: 
+  <div id="initial-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#fff;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s ease;">
+    <img src="/duo-icon.svg" style="width:100px; animation: walkingDuo 0.8s infinite alternate linear, floatRotate 3.5s infinite linear; margin-bottom: 24px;" alt="Starting Duo...">
+    <style>
+      @keyframes floatRotate {
+        0% {
+          transform: translateY(0) rotate(-5deg);
+        }
+
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+
+        100% {
+          transform: translateY(0) rotate(-5deg);
+        }
+      }
+
+      @keyframes walkingDuo {
+        0% {
+          transform: translateX(-30px) rotate(-15deg);
+        }
+
+        50% {
+          transform: translateX(0px) translateY(-10px) rotate(15deg);
+        }
+
+        100% {
+          transform: translateX(30px) rotate(-15deg);
+        }
+      }
+    </style>
+  </div>
+  <div id="app"><div class="lesson-page" id="lesson-container">
+    <div class="lesson-header">
+      <button class="lesson-close" onclick="exitLesson()"><svg class="duo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+      <div class="lesson-progress">
+        <div class="lesson-progress-fill" style="width:0%"></div>
+      </div>
+      <div class="lesson-hearts">
+        <span class="heart-icon"><img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/hearts/8fdba477c56a8eeb23f0f7e67fdec6d9.svg"></span>
+        <span class="heart-count">5</span>
+      </div>
+    </div>
+    <div class="lesson-content animate-in">
+      
+      <div class="lesson-badge"><div class="badge-dot"></div><span>NEW WORD: Basics</span></div>
+      <h2 class="lesson-question">Which one of these is "coffee"?</h2>
+      <div class="lesson-options" style="grid-template-columns:repeat(2, 1fr)">
+        
+          <div class="lesson-option   " onclick="selectAnswer('café')" id="opt-1">
+            <span class="option-img">☕</span>
+            <div class="option-label">
+              <span>café</span>
+              <span class="key-hint">1</span>
+            </div>
+          </div>
+        
+          <div class="lesson-option   " onclick="selectAnswer('agua')" id="opt-2">
+            <span class="option-img">💧</span>
+            <div class="option-label">
+              <span>agua</span>
+              <span class="key-hint">2</span>
+            </div>
+          </div>
+        
+          <div class="lesson-option   " onclick="selectAnswer('pan')" id="opt-3">
+            <span class="option-img">🥖</span>
+            <div class="option-label">
+              <span>pan</span>
+              <span class="key-hint">3</span>
+            </div>
+          </div>
+        
+          <div class="lesson-option   " onclick="selectAnswer('leche')" id="opt-4">
+            <span class="option-img">🥛</span>
+            <div class="option-label">
+              <span>leche</span>
+              <span class="key-hint">4</span>
+            </div>
+          </div>
+        
+      </div>
+    
+    </div>
+    <div class="lesson-footer ">
+      
+      <button class="btn btn-white" onclick="skipQuestion()" style="min-width:120px">SKIP</button>
+      <button class="btn btn-disabled" onclick="checkAnswer()" id="check-btn" style="min-width:140px">CHECK</button>
+    
+    </div>
+  </div></div>
+  <script type="module" src="/src/main.ts?t=1773159425909"></script>
+
+
+

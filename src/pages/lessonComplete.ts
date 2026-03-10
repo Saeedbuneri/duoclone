@@ -1,9 +1,24 @@
 import { AppState } from '../state';
+import { playSound } from '../audio';
 
 export function LessonCompletePage() {
   const s = AppState.user;
-  const xpEarned = 30;
-  const accuracy = Math.round((1 - 0.15) * 100);
+  let stats = { time: 165000, accuracy: 85, xp: 30, streak: s.streak };
+  try {
+    const saved = sessionStorage.getItem('lessonStats');
+    if (saved) {
+      stats = JSON.parse(saved);
+      sessionStorage.removeItem('lessonStats');
+    }
+  } catch (e) { }
+
+  const xpEarned = stats.xp;
+  const accuracy = stats.accuracy;
+  const streak = stats.streak;
+
+  const mins = Math.floor(stats.time / 60000);
+  const secs = Math.floor((stats.time % 60000) / 1000);
+  const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
 
   const content = `
     <div class="lesson-complete" style="position:relative; overflow:hidden">
@@ -27,12 +42,12 @@ export function LessonCompletePage() {
         </div>
         <div class="complete-stat animate-in" style="animation-delay: 0.9s; background: #DDF4FF; border: 2px solid #1CB0F6; padding: 16px; border-radius: 16px; min-width: 90px; border-bottom: 4px solid #1CB0F6;">
           <div class="cs-label-top" style="color: #1CB0F6">SPEED</div>
-          <div class="cs-value" style="color:#1CB0F6">2:45</div>
+          <div class="cs-value" style="color:#1CB0F6">${timeStr}</div>
           <div class="cs-label" style="color: #1581b3">Time</div>
         </div>
         <div class="complete-stat animate-in" style="animation-delay: 1.1s; background: #FFF0D6; border: 2px solid #FF9600; padding: 16px; border-radius: 16px; min-width: 90px; border-bottom: 4px solid #FF9600;">
           <div class="cs-label-top" style="color: #FF9600">GREAT</div>
-          <div class="cs-value" style="color:#FF9600">🔥 ${s.streak}</div>
+          <div class="cs-value" style="color:#FF9600">🔥 ${streak}</div>
           <div class="cs-label" style="color: #CC7800">Day Streak</div>
         </div>
       </div>
@@ -81,27 +96,9 @@ export function LessonCompletePage() {
       }
 
       // Play sound
-      if ('AudioContext' in window || 'webkitAudioContext' in window) {
-        setTimeout(() => {
-          try {
-            // Mock sound effect by using a very short synth pop
-            const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-            const ctx = new AudioContext();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-            osc.frequency.exponentialRampToValueAtTime(1046.50, ctx.currentTime + 0.1); // C6
-            gain.gain.setValueAtTime(0, ctx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-            osc.start(ctx.currentTime);
-            osc.stop(ctx.currentTime + 0.5);
-          } catch (e) { }
-        }, 500);
-      }
+      setTimeout(() => {
+        playSound('fanfare');
+      }, 500);
     }
   };
 }
