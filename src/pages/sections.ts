@@ -2,48 +2,53 @@ import { AppLayout, RightPanelWidgets } from '../components';
 import { AppState } from '../state';
 
 export function SectionsPage() {
-    const s = AppState.activeProgress;
-    const currentLevel = s.currentSection || 1;
+  const s = AppState.activeProgress;
+  const currentLevel = s.currentSection || 1;
 
-    const sectionsData = [
-        {
-            id: 1,
-            name: 'Section 1',
-            badge: 'A1 • SEE DETAILS',
-            units: 5,
-            phrase: '¡Hola!',
-        },
-        {
-            id: 2,
-            name: 'Section 2',
-            badge: 'A1 • SEE DETAILS',
-            units: 12,
-            phrase: 'Quiero aprender español.',
-        },
-        {
-            id: 3,
-            name: 'Section 3',
-            badge: 'A1 • SEE DETAILS',
-            units: 15,
-            phrase: 'Sé algunas palabras.',
-        },
-        {
-            id: 4,
-            name: 'Section 4',
-            badge: 'A2 • SEE DETAILS',
-            units: 20,
-            phrase: 'Practico todos los días.',
-        },
-        {
-            id: 5,
-            name: 'Section 5',
-            badge: 'B1 • SEE DETAILS',
-            units: 25,
-            phrase: 'Puedo tener conversaciones largas.',
-        }
-    ];
+  const sectionsData = [
+    {
+      id: 1,
+      name: 'Section 1: Rookie',
+      badge: 'A1 • SEE DETAILS',
+      units: 5,
+      phrase: '¡Hola! ¿Cómo estás?',
+      decoration: '/section-decoration-1.svg'
+    },
+    {
+      id: 2,
+      name: 'Section 2: Explorer',
+      badge: 'A1 • SEE DETAILS',
+      units: 12,
+      phrase: 'Quiero aprender español.',
+      decoration: '/section-decoration-2.svg'
+    },
+    {
+      id: 3,
+      name: 'Section 3: Traveler',
+      badge: 'A1 • SEE DETAILS',
+      units: 15,
+      phrase: 'Sé algunas palabras.',
+      decoration: '/section-decoration-1.svg' // Reuse or find more
+    },
+    {
+      id: 4,
+      name: 'Section 4: Trailblazer',
+      badge: 'A2 • SEE DETAILS',
+      units: 20,
+      phrase: 'Practico todos los días.',
+      decoration: '/section-decoration-2.svg'
+    },
+    {
+      id: 5,
+      name: 'Section 5: Adventurer',
+      badge: 'B1 • SEE DETAILS',
+      units: 25,
+      phrase: 'Puedo tener conversaciones largas.',
+      decoration: '/section-trophy.svg'
+    }
+  ];
 
-    const htmlContent = `
+  const htmlContent = `
     <div class="sections-page">
       <div class="sections-top-nav">
         <button class="back-link" onclick="window.__router.navigate('/learn')">
@@ -54,23 +59,23 @@ export function SectionsPage() {
       
       <div class="sections-list">
         ${sectionsData.map((sec, index) => {
-        const isActive = currentLevel === sec.id;
-        const isLocked = currentLevel < sec.id;
-        const animDelay = index * 0.1;
+    const isActive = currentLevel === sec.id;
+    const isLocked = currentLevel < sec.id;
+    const animDelay = index * 0.1;
 
-        const cardClass = isActive ? 'section-wrapper active' : isLocked ? 'section-wrapper locked' : 'section-wrapper completed';
+    const cardClass = isActive ? 'section-wrapper active' : isLocked ? 'section-wrapper locked' : 'section-wrapper completed';
 
-        let buttonHtml = '';
-        if (isActive) {
-            buttonHtml = `<button class="btn btn-blue" onclick="jumpToSection(${sec.id})" style="margin-top: 16px; min-width: 140px; font-size: 15px; padding: 12px 18px;">CONTINUE</button>`;
-        } else if (isLocked) {
-            buttonHtml = `<button class="btn btn-outline" onclick="jumpToSection(${sec.id})" style="margin-top: 16px; min-width: 140px; font-size: 13px; padding: 12px 18px; color: #1CB0F6; border-color: #E5E5E5; background: white;">JUMP TO SECTION ${sec.id}</button>`;
-        } else {
-            // Completed
-            buttonHtml = `<button class="btn btn-outline" onclick="jumpToSection(${sec.id})" style="margin-top: 16px; min-width: 140px; font-size: 13px; padding: 12px 18px; color: #AFB0B0; border-color: #E5E5E5; background: white;">REVIEW SECTION ${sec.id}</button>`;
-        }
+    let buttonHtml = '';
+    if (isActive) {
+      buttonHtml = `<button class="btn btn-blue" onclick="jumpToSection(${sec.id})" style="margin-top: 16px; min-width: 140px; font-size: 15px; padding: 12px 18px;">CONTINUE</button>`;
+    } else if (isLocked) {
+      buttonHtml = `<button class="btn btn-outline" onclick="jumpToSection(${sec.id})" style="margin-top: 16px; min-width: 140px; font-size: 13px; padding: 12px 18px; color: #1CB0F6; border-color: #E5E5E5; background: white;">JUMP TO SECTION ${sec.id}</button>`;
+    } else {
+      // Completed
+      buttonHtml = `<button class="btn btn-outline" onclick="jumpToSection(${sec.id})" style="margin-top: 16px; min-width: 140px; font-size: 13px; padding: 12px 18px; color: #AFB0B0; border-color: #E5E5E5; background: white;">REVIEW SECTION ${sec.id}</button>`;
+    }
 
-        return `
+    return `
             <div class="${cardClass} animate-in" style="animation-delay: ${animDelay}s;">
               <div class="section-card-main">
                 <div class="section-badge">${sec.badge}</div>
@@ -98,25 +103,25 @@ export function SectionsPage() {
                 ${buttonHtml}
               </div>
               <div class="section-mascot-container">
-                <div class="section-bubble">${sec.phrase}</div>
+                <div class="section-bubble" style="${isLocked ? 'background: #F0F0F0; color: #AFB0B0;' : ''}">${sec.phrase}</div>
                 <div class="section-mascot">
-                   <img src="/duo-icon.svg" style="width: 130px; height: auto;" />
+                   <img src="${sec.decoration}" style="width: 140px; height: auto; ${isLocked ? 'filter: grayscale(100%) opacity(0.6);' : ''}" />
                 </div>
               </div>
             </div>
           `;
-    }).join('')}
+  }).join('')}
       </div>
     </div>
   `;
 
-    return {
-        html: AppLayout('learn', htmlContent, RightPanelWidgets()), // 'learn' nav item stays active
-        init() {
-            (window as any).jumpToSection = (secId: number) => {
-                AppState.updateProgress({ currentSection: secId });
-                window.__router.navigate('/learn');
-            };
-        }
-    };
+  return {
+    html: AppLayout('learn', htmlContent, RightPanelWidgets()), // 'learn' nav item stays active
+    init() {
+      (window as any).jumpToSection = (secId: number) => {
+        AppState.updateProgress({ currentSection: secId });
+        window.__router.navigate('/learn');
+      };
+    }
+  };
 }

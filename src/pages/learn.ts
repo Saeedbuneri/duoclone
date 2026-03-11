@@ -121,8 +121,8 @@ export function LearnPage() {
           <h2>← SECTION ${unit.section}, UNIT ${unit.unit}</h2>
           <h3>${unit.title}</h3>
         </div>
-        <button class="guidebook-btn" title="Guidebook" onclick="showGuidebook(${unit.unit}, '${unit.title.replace(/'/g, "\\'")}', '${unit.color}')">
-          <div style="width:24px;height:24px;display:flex;align-items:center;">${icons.guidebook}</div>
+        <button class="guidebook-btn" onclick="showGuidebook(${unit.unit}, '${unit.title.replace(/'/g, "\\'")}', '${unit.color}')">
+          <div style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${icons.guidebook}</div>
           <span>GUIDEBOOK</span>
         </button>
       </div>
@@ -138,12 +138,15 @@ export function LearnPage() {
       const ringClass = node.status === 'active' ? 'active-ring' :
         node.status === 'completed' ? 'completed-ring' : '';
 
+      // Alternate node offset logic for snake path
+      const horizontalOffset = Math.sin(i * 1.0) * 45;
+
       return `
-        <div class="path-node" id="node-${node.id}">
+        <div class="path-node" id="node-${node.id}" style="transform: translateX(${horizontalOffset}px);">
           ${showStartTooltip ? '<div class="start-tooltip">START</div>' : ''}
           <div class="node-ring ${ringClass}">
             <button class="node-btn" 
-                    style="background:${bgColor};box-shadow:0 4px 0 ${shadowColor};${node.status === 'locked' ? 'cursor:default;' : ''}"
+                    style="background:${bgColor};box-shadow:0 6px 0 ${shadowColor};${node.status === 'locked' ? 'cursor:default;' : ''}"
                     onclick="${node.status !== 'locked' ? `togglePopup(${node.id})` : ''}"
                     ${node.status === 'locked' ? 'disabled' : ''}>
               ${nodeIcon}
@@ -157,13 +160,13 @@ export function LearnPage() {
               ${node.status === 'completed' ? 'PRACTICE' : 'START +10 XP'}
             </button>
           </div>` : ''}
-          ${showMascot ? `<div class="path-mascot-inline" style="position:absolute; right: -70px; top: 10px; animation: floatRotate 3.5s infinite alternate ease-in-out; pointer-events: none; z-index: 5;">${DuoMascotPath}</div>` : ''}
+          ${showMascot ? `<div class="path-mascot-inline" style="position:absolute; right: -75px; top: 10px; animation: floatRotate 3.5s infinite alternate ease-in-out; pointer-events: none; z-index: 5; transform: scale(0.9);">${DuoMascotPath}</div>` : ''}
           ${i < unit.nodes.length - 1 ? `<div class="path-connector ${node.status === 'completed' ? 'active' : ''}"></div>` : ''}
         </div>
       `;
     }).join('');
 
-    return `${divider}${sectionHeader}<div class="path-container">${nodesHtml}</div>`;
+    return `${divider}${sectionHeader}<div class="path-container" style="padding-top: 32px; padding-bottom: 64px;">${nodesHtml}</div>`;
   }).join('');
 
   return {

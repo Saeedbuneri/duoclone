@@ -1,5 +1,6 @@
 import { DuoSmall } from '../components';
 import { AppState } from '../state';
+import { flagIcons } from '../icons';
 
 interface Step {
   question: string;
@@ -12,20 +13,16 @@ const steps: Step[] = [
     question: 'What do you want to learn?',
     type: 'languages',
     options: [
-      { icon: '🇪🇸', label: 'Spanish', value: 'Spanish' },
-      { icon: '🇫🇷', label: 'French', value: 'French' },
-      { icon: '🇩🇪', label: 'German', value: 'German' },
-      { icon: '🇯🇵', label: 'Japanese', value: 'Japanese' },
-      { icon: '🇰🇷', label: 'Korean', value: 'Korean' },
-      { icon: '🇮🇹', label: 'Italian', value: 'Italian' },
-      { icon: '🇨🇳', label: 'Chinese', value: 'Chinese' },
-      { icon: '🇵🇹', label: 'Portuguese', value: 'Portuguese' },
-      { icon: '🇷🇺', label: 'Russian', value: 'Russian' },
-      { icon: '🇹🇷', label: 'Turkish', value: 'Turkish' },
-      { icon: '🇳🇱', label: 'Dutch', value: 'Dutch' },
-      { icon: '🇮🇳', label: 'Hindi', value: 'Hindi' },
-      { icon: '🇸🇦', label: 'Arabic', value: 'Arabic' },
-      { icon: '🇸🇪', label: 'Swedish', value: 'Swedish' },
+      { icon: flagIcons['Spanish'], label: 'Spanish', value: 'Spanish' },
+      { icon: flagIcons['French'], label: 'French', value: 'French' },
+      { icon: flagIcons['German'], label: 'German', value: 'German' },
+      { icon: flagIcons['Japanese'], label: 'Japanese', value: 'Japanese' },
+      { icon: flagIcons['Korean'] || '🇰🇷', label: 'Korean', value: 'Korean' },
+      { icon: flagIcons['Italian'], label: 'Italian', value: 'Italian' },
+      { icon: flagIcons['Chinese'], label: 'Chinese', value: 'Chinese' },
+      { icon: flagIcons['Russian'] || '🇷🇺', label: 'Russian', value: 'Russian' },
+      { icon: flagIcons['Dutch'] || '🇳🇱', label: 'Dutch', value: 'Dutch' },
+      { icon: flagIcons['Arabic'] || '🇸🇦', label: 'Arabic', value: 'Arabic' },
     ],
   },
   {

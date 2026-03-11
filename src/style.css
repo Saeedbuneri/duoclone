@@ -3320,3 +3320,162 @@ ul {
   padding-top: 24px;
 }
 
+
+/* ===== REFINED PATH STYLES ===== */
+.section-header {
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  padding: 24px !important;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/path-header-pattern.svg');
+  background-size: 150px;
+  opacity: 0.2;
+  pointer-events: none;
+}
+.section-header-info h2 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  opacity: 0.8;
+  margin: 0;
+}
+.section-header-info h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 4px 0 0 0;
+}
+.guidebook-btn {
+  background: rgba(0, 0, 0, 0.15) !important;
+  border: 4px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 8px 16px !important;
+  color: white !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.8px !important;
+  gap: 8px !important;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.guidebook-btn:active {
+  transform: translateY(2px);
+}
+
+.node-btn {
+  width: 70px !important;
+  height: 60px !important;
+  border-radius: 40px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+.node-btn .duo-icon {
+  width: 32px;
+  height: 32px;
+}
+.node-ring {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+}
+.node-ring.active-ring::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--duo-green);
+  border-radius: 50%;
+  animation: pulse-ring 2s infinite;
+  opacity: 0.4;
+}
+
+
+/* ===== REFINED OPTION CARDS (Duolingo Style) ===== */
+.onboarding-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.option-card {
+  border: 2px solid var(--duo-gray-200);
+  border-bottom: 4px solid var(--duo-gray-200);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.1s;
+  background: white;
+}
+.option-card:hover {
+  background: #F7F7F7;
+}
+.option-card:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+.option-card.selected {
+  background: #E5F3FF;
+  border-color: #84D8FF;
+  border-bottom-color: #84D8FF;
+  color: #1CB0F6;
+}
+.option-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.option-text {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.btn-green {
+  background: #58CC02;
+  border-bottom: 4px solid #46A302;
+}
+.btn-green:hover {
+  background: #61E002;
+}
+.btn-blue {
+  background: #1CB0F6;
+  border-bottom: 4px solid #1899D6;
+}
+.btn-blue:hover {
+  background: #23BDFF;
+}
+.btn:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px !important;
+}
+

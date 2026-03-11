@@ -12,17 +12,19 @@ export const icons = {
     more: `<img class="duo-icon" src="/icon-more.svg" alt="More" />`,
     settings: `<img class="duo-icon" src="/icon-more.svg" alt="Settings" />`,
 
-    // ===== TOP STATS ICONS (Official Duolingo CDN) =====
-    streak: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/icons/398e4298a3b39ce566050e5c041949ef.svg" onerror="this.src='https://d35aaqx5ub95lt.cloudfront.net/images/icons/ba95e6081679d9d7e8c132da5cfce1ec.svg'"/>`,
-    gems: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/gems/45c14e05be9c1af1d7d0b54c6eed7eee.svg" />`,
-    heart: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/hearts/8fdba477c56a8eeb23f0f7e67fdec6d9.svg" />`,
+    // ===== TOP STATS ICONS =====
+    streak: `<img class="duo-icon" src="/stat-streak-inactive.svg" />`,
+    gems: `<img class="duo-icon" src="/stat-gems.svg" />`,
+    heart: `<img class="duo-icon" src="/stat-heart-full.svg" />`,
+    heartEmpty: `<img class="duo-icon" src="/stat-heart-empty.svg" />`,
 
-    // ===== PATH NODE ICONS (Official Duolingo CDN & SVGs) =====
-    starActive: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ef9c771afdb674f0ff82fae25c6a7b0a.svg" />`,
-    starLocked: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ddd21f172a2db0f5ef169c09b4d3badb.svg" style="opacity: 0.6; transform: scale(1.2);" />`,
-    chest: `<img class="duo-icon" src="/icon-quests.svg" style="transform: scale(1.3);" />`,
-    trophy: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/7d84afaa096ff1f1d3f8c86d6c2c9542.svg" style="transform: scale(1.2);" />`,
+    // ===== PATH NODE ICONS =====
+    starActive: `<img class="duo-icon" src="/path-star.svg" />`,
+    starLocked: `<img class="duo-icon" src="/path-locked.svg" />`,
+    chest: `<img class="duo-icon" src="/path-chest-locked.svg" style="transform: scale(1.3);" />`,
+    trophy: `<img class="duo-icon" src="/path-trophy-locked.svg" style="transform: scale(1.2);" />`,
     checkmark: `<svg class="duo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`,
+    pathHeaderPattern: `<img src="/path-header-pattern.svg" />`,
 
     // ===== UTILITY ICONS =====
     guidebook: `<svg class="duo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`,
@@ -47,14 +49,14 @@ export const icons = {
     medalBronze: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/leagues/d4280fdf64d66de7390fe84802432a53.svg" />`,
 
     // Flags
-    flag_es: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="22" rx="3" fill="#C60B1E"/><rect y="5.5" width="30" height="11" fill="#FFC400"/></svg>`,
-    flag_fr: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="22" rx="3" fill="#EF4135"/><rect width="10" height="22" rx="3" fill="#002395"/><rect x="10" width="10" height="22" fill="white"/></svg>`,
-    flag_de: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="7" rx="3" fill="#000"/><rect y="7" width="30" height="8" fill="#DD0000"/><rect y="15" width="30" height="7" rx="3" fill="#FFCC00"/></svg>`,
-    flag_jp: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="22" rx="3" fill="white"/><circle cx="15" cy="11" r="6" fill="#BC002D"/></svg>`,
-    flag_it: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="22" rx="3" fill="#CE2B37"/><rect width="10" height="22" rx="3" fill="#009246"/><rect x="10" width="10" height="22" fill="white"/></svg>`,
-    flag_cn: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="22" rx="3" fill="#EE1C25"/><circle cx="6" cy="6" r="3" fill="#FFFF00"/></svg>`,
-    flag_ru: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="7.3" rx="3" fill="white"/><rect y="7.3" width="30" height="7.3" fill="#0039A6"/><rect y="14.6" width="30" height="7.4" rx="3" fill="#D52B1E"/></svg>`,
-    flag_nl: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="7.3" rx="3" fill="#AE1C28"/><rect y="7.3" width="30" height="7.3" fill="white"/><rect y="14.6" width="30" height="7.4" rx="3" fill="#21468B"/></svg>`,
+    flag_es: `<img class="duo-icon" src="/flag-es.svg" />`,
+    flag_fr: `<img class="duo-icon" src="/flag-fr.svg" />`,
+    flag_de: `<img class="duo-icon" src="/flag-de.svg" />`,
+    flag_jp: `<img class="duo-icon" src="/flag-jp.svg" />`,
+    flag_it: `<img class="duo-icon" src="/flag-it.svg" />`,
+    flag_cn: `<img class="duo-icon" src="/flag-cn.svg" />`,
+    flag_kr: `<img class="duo-icon" src="/flag-kr.svg" />`,
+    flag_ar: `<img class="duo-icon" src="/flag-ar.svg" />`,
     flag_globe: `<svg viewBox="0 0 30 22" class="duo-icon"><rect width="30" height="22" rx="3" fill="#1CB0F6"/><circle cx="15" cy="11" r="5" fill="none" stroke="white" stroke-width="2"/><line x1="10" y1="11" x2="20" y2="11" stroke="white" stroke-width="1"/><line x1="15" y1="6" x2="15" y2="16" stroke="white" stroke-width="1"/></svg>`
 };
 
@@ -65,6 +67,6 @@ export const flagIcons: Record<string, string> = {
     'Japanese': icons.flag_jp,
     'Italian': icons.flag_it,
     'Chinese': icons.flag_cn,
-    'Russian': icons.flag_ru,
-    'Dutch': icons.flag_nl,
+    'Korean': icons.flag_kr,
+    'Arabic': icons.flag_ar,
 };
