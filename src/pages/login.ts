@@ -16,14 +16,14 @@ export function LoginPage() {
           <h2 class="login-title">Log in</h2>
           <form class="login-form" id="login-form">
             <div class="input-group">
-              <input type="email" placeholder="Email or username" id="login-email" autocomplete="email" value="user@duo.com" required />
+              <input type="email" placeholder="Email or username" id="login-email" autocomplete="email" required />
             </div>
             <div class="input-group">
-              <input type="password" placeholder="Password" id="login-password" autocomplete="current-password" value="pass123" required />
+              <input type="password" placeholder="Password" id="login-password" autocomplete="current-password" required />
               <button type="button" class="toggle-pw" onclick="togglePassword()">👁️</button>
             </div>
             <a href="#" onclick="duoAlert('Password reset link sent to ' + (document.getElementById('login-email').value || 'your email') + '!', '📧', 'GOT IT')" style="font-size:14px;font-weight:700;color:#1CB0F6;text-transform:uppercase;align-self:flex-start">FORGOT PASSWORD?</a>
-            <button type="submit" class="btn btn-green btn-full" style="margin-top:4px">LOG IN</button>
+            <button type="submit" class="btn btn-green btn-full" id="login-submit" style="margin-top:4px">LOG IN</button>
           </form>
           <div class="login-divider"><span>OR</span></div>
           <div class="social-buttons">
@@ -45,16 +45,25 @@ export function LoginPage() {
         e.preventDefault();
         const emailInput = document.getElementById('login-email') as HTMLInputElement;
         const passwordInput = document.getElementById('login-password') as HTMLInputElement;
+        const btn = document.getElementById('login-submit') as HTMLButtonElement;
 
         if (!emailInput.value || !passwordInput.value) {
           (window as any).duoAlert('Please fill in all fields.', '⚠️', 'OK', 'btn-red');
           return;
         }
 
-        const email = emailInput.value;
-        const name = email.split('@')[0] || 'Learner';
-        AppState.login(name, email);
-        window.__router.navigate('/learn');
+        // Simulate network loading
+        btn.textContent = "VERIFYING...";
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
+        btn.style.cursor = "not-allowed";
+
+        setTimeout(() => {
+          const email = emailInput.value;
+          const name = email.split('@')[0] || 'Learner';
+          AppState.login(name, email);
+          window.__router.navigate('/learn');
+        }, 1200);
       });
 
       (window as any).togglePassword = () => {
@@ -63,8 +72,15 @@ export function LoginPage() {
       };
 
       (window as any).socialLogin = (provider: string) => {
-        AppState.login(`${provider} User`, `user@${provider.toLowerCase()}.com`);
-        window.__router.navigate('/learn');
+        const btnId = event?.currentTarget as HTMLButtonElement;
+        if (btnId) {
+          btnId.style.opacity = "0.5";
+          btnId.textContent = "Connecting...";
+        }
+        setTimeout(() => {
+          AppState.login(`${provider} User`, `user@${provider.toLowerCase()}.com`);
+          window.__router.navigate('/learn');
+        }, 800);
       };
     }
   };
