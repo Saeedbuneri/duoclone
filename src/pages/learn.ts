@@ -117,7 +117,7 @@ export function LearnPage() {
 
     const sectionHeader = `
       <div class="section-header animate-in" style="background:${unit.color}">
-        <div class="section-header-info">
+        <div class="section-header-info" style="cursor: pointer;" onclick="window.__router.navigate('/sections')">
           <h2>← SECTION ${unit.section}, UNIT ${unit.unit}</h2>
           <h3>${unit.title}</h3>
         </div>

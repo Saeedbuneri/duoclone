@@ -15,6 +15,7 @@ import { LessonCompletePage } from './pages/lessonComplete';
 import { LettersPage } from './pages/letters';
 import { SuperPage } from './pages/super';
 import { AboutPage, BlogPage, StorePage, EfficacyPage, CareersPage, InvestorsPage, TermsPage, PrivacyPage } from './pages/info';
+import { SectionsPage } from './pages/sections';
 import { AppState } from './state';
 import { playSound } from './audio';
 
@@ -45,6 +46,7 @@ router.addRoute('/careers', CareersPage);
 router.addRoute('/investors', InvestorsPage);
 router.addRoute('/terms', TermsPage);
 router.addRoute('/privacy', PrivacyPage);
+router.addRoute('/sections', SectionsPage);
 router.start();
 
 // Remove initial loader
