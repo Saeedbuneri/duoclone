@@ -12,16 +12,21 @@ export function SettingsPage() {
         <h3>Account</h3>
         <div class="setting-row">
           <span class="setting-label">Name</span>
-          <span class="setting-value">${s.name}</span>
+          <input type="text" id="setting-name" value="${s.name}" style="text-align:right; border:none; background:transparent; font-size:17px; font-weight:700; color:#4B4B4B; outline:none; max-width: 150px;" />
         </div>
         <div class="setting-row">
           <span class="setting-label">Email</span>
-          <span class="setting-value">${s.email || 'Not set'}</span>
+          <input type="email" id="setting-email" value="${s.email}" style="text-align:right; border:none; background:transparent; font-size:17px; font-weight:700; color:#4B4B4B; outline:none; max-width: 150px;" />
         </div>
         <div class="setting-row">
           <span class="setting-label">Language</span>
-          <span class="setting-value">${s.languageFlag} ${s.language}</span>
+          <select id="setting-language" style="text-align:right; border:none; background:transparent; font-size:17px; font-weight:700; color:#4B4B4B; outline:none; cursor:pointer;" dir="rtl">
+            ${['Spanish', 'French', 'German', 'Japanese', 'Korean', 'Italian', 'Chinese', 'Portuguese', 'Russian', 'Turkish', 'Dutch', 'Hindi', 'Arabic', 'Swedish'].map(lang =>
+    `<option value="${lang}" ${s.language === lang ? 'selected' : ''}>${lang}</option>`
+  ).join('')}
+          </select>
         </div>
+        <button class="btn btn-blue btn-full" style="margin-top:10px" onclick="window.saveAccountSettings()">SAVE ACCOUNT SETTINGS</button>
       </div>
       <div class="settings-section animate-in" style="animation-delay:0.1s">
         <h3>Learning</h3>
@@ -87,6 +92,31 @@ export function SettingsPage() {
   return {
     html: AppLayout('settings', content),
     init() {
+      (window as any).saveAccountSettings = () => {
+        const newName = (document.getElementById('setting-name') as HTMLInputElement).value;
+        const newEmail = (document.getElementById('setting-email') as HTMLInputElement).value;
+        const newLang = (document.getElementById('setting-language') as HTMLSelectElement).value;
+
+        const langData: Record<string, string> = {
+          'Spanish': '🇪🇸', 'French': '🇫🇷', 'German': '🇩🇪', 'Japanese': '🇯🇵',
+          'Korean': '🇰🇷', 'Italian': '🇮🇹', 'Chinese': '🇨🇳', 'Portuguese': '🇵🇹',
+          'Russian': '🇷🇺', 'Turkish': '🇹🇷', 'Dutch': '🇳🇱', 'Hindi': '🇮🇳',
+          'Arabic': '🇸🇦', 'Swedish': '🇸🇪'
+        };
+
+        AppState.update({
+          name: newName,
+          email: newEmail,
+          language: newLang,
+          languageFlag: langData[newLang] || '🌍',
+          isLoggedIn: true // If they saved profile info, consider them a registered user
+        });
+
+        (window as any).duoAlert('Your account settings have been successfully updated!', '✅', 'AWESOME');
+        // Refresh to show changes immediately
+        setTimeout(() => window.__router.navigate('/settings'), 100);
+      };
+
       (window as any).logoutUser = (purge = false) => {
         if (purge) {
           AppState.reset();

@@ -171,7 +171,7 @@ export function OnboardingPage() {
         selectedValue = null;
 
         if (currentStep >= steps.length) {
-          AppState.update({ isLoggedIn: true });
+          // AppState.update({ isLoggedIn: true }); // Removed to preserve guests
           window.__router.navigate('/learn');
         } else {
           render();
