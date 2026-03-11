@@ -19058,17 +19058,53 @@ body.bionic-reading .bionic-bold {
 `
   },
   "investors": {
-    html: `<html><head>
-<title>Protected Content</title>
-</head><body>
-<h1>Protected Content</h1>
- 
-You don't have permission to access "http://investors.duolingo.com/" on this server.<p>
-Reference #18.24283417.1773168268.c907c3c1
-</p><p>https://errors.edgesuite.net/18.24283417.1773168268.c907c3c1</p>
+    html: `<div
+    style="background-color: var(--duo-white); min-height: 100vh; padding: 40px; text-align: center; font-family: var(--duo-font); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div style="max-width: 600px;">
+        <img onerror="this.style.display='none'" src="https://investors.duolingo.com/system/files-encrypted/nasdaq_kms/assets/2021/07/28/9-10-38/duolingo-horizontal-color.svg"
+            alt="Duolingo Investors" style="height: 48px; margin-bottom: 32px;"
+            onerror="this.onerror=null; this.src='https://d35aaqx5ub95lt.cloudfront.net/images/duolingo-logo.svg'">
 
+        <h1 style="color: var(--duo-gray-500); font-size: 42px; font-weight: 800; margin-bottom: 24px;">Investor
+            Relations</h1>
 
-</body></html>`,
+        <p style="color: var(--duo-gray-400); font-size: 18px; line-height: 1.6; margin-bottom: 40px;">
+            Welcome to the Duolingo Investor Relations page. We are committed to transparency and providing our
+            shareholders with the latest financial information, corporate governance updates, and news.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left;">
+            <div
+                style="background: var(--duo-gray-100); padding: 24px; border-radius: var(--duo-radius-lg); border: var(--duo-border);">
+                <h3 style="color: var(--duo-green-dark); font-size: 20px; font-weight: 800; margin-bottom: 12px;">
+                    Financials</h3>
+                <p style="color: var(--duo-gray-500); font-size: 14px;">Access our latest quarterly earnings reports,
+                    SEC filings, and annual reports.</p>
+                <button
+                    style="margin-top: 16px; width: 100%; border-radius: var(--duo-radius); background: var(--duo-white); border: 2px solid var(--duo-gray-200); padding: 12px; font-weight: 700; color: var(--duo-blue); box-shadow: 0 2px 0 var(--duo-gray-200);">VIEW
+                    REPORTS</button>
+            </div>
+            <div
+                style="background: var(--duo-gray-100); padding: 24px; border-radius: var(--duo-radius-lg); border: var(--duo-border);">
+                <h3 style="color: var(--duo-blue-dark); font-size: 20px; font-weight: 800; margin-bottom: 12px;">
+                    Governance</h3>
+                <p style="color: var(--duo-gray-500); font-size: 14px;">Review our corporate governance guidelines,
+                    board of directors, and committee structures.</p>
+                <button
+                    style="margin-top: 16px; width: 100%; border-radius: var(--duo-radius); background: var(--duo-white); border: 2px solid var(--duo-gray-200); padding: 12px; font-weight: 700; color: var(--duo-blue); box-shadow: 0 2px 0 var(--duo-gray-200);">VIEW
+                    GOVERNANCE</button>
+            </div>
+        </div>
+
+        <div
+            style="margin-top: 40px; padding: 24px; background: var(--duo-green-light); border-radius: var(--duo-radius-lg); border: 2px solid var(--duo-green-dark); box-shadow: 0 4px 0 var(--duo-green-dark);">
+            <h3 style="color: var(--duo-white); font-size: 24px; font-weight: 800; margin-bottom: 8px;">NASDAQ: DUOL
+            </h3>
+            <p style="color: var(--duo-white); font-size: 16px; font-weight: 600;">Developing the best education in the
+                world and making it universally available.</p>
+        </div>
+    </div>
+</div>`,
     css: ``
   },
   "terms": {
