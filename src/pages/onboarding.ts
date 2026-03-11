@@ -95,6 +95,7 @@ function render() {
                onclick="selectOption('${opt.value}')">
             <span class="lang-flag">${opt.icon}</span>
             <span class="lang-name">${opt.label}</span>
+            ${selectedValue === opt.value ? `<div class="lang-check">✔</div>` : ''}
           </div>
         `).join('')}
       </div>
@@ -107,6 +108,7 @@ function render() {
                onclick="selectOption('${opt.value}')">
             <div class="option-icon">${opt.icon}</div>
             <div class="option-text">${opt.label}</div>
+            ${selectedValue === opt.value ? `<div class="lang-check" style="margin-left:auto">✔</div>` : ''}
           </div>
         `).join('')}
       </div>
@@ -115,10 +117,12 @@ function render() {
 
   container.innerHTML = `
     <div class="onboarding-header">
-      <button class="close-btn" onclick="duoConfirm('Quit setup? Your progress will be lost.', () => window.__router.navigate('/'), '🚪', 'QUIT', 'CONTINUE')">✕</button>
-    </div>
-    <div class="onboarding-progress">
-      <div class="onboarding-progress-fill" style="width:${progress}%"></div>
+      <button class="close-btn" onclick="duoConfirm('Quit setup? Your progress will be lost.', () => window.__router.navigate('/'), '🚪', 'QUIT', 'CONTINUE')">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24"><path d="M15.5 19.5L8.5 12L15.5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+      </button>
+      <div class="onboarding-progress">
+        <div class="onboarding-progress-fill" style="width:${progress}%"></div>
+      </div>
     </div>
     <div class="onboarding-content">
       <div class="onboarding-mascot">
@@ -128,7 +132,9 @@ function render() {
       ${optionsHtml}
     </div>
     <div class="onboarding-footer">
-      <button class="btn ${selectedValue ? 'btn-green' : 'btn-disabled'}" onclick="continueStep()">CONTINUE</button>
+      <div class="onboarding-footer-inner">
+        <button class="btn ${selectedValue ? 'btn-green' : 'btn-disabled'}" style="min-width: 150px; font-size: 15px;" onclick="continueStep()">CONTINUE</button>
+      </div>
     </div>
   `;
 }
