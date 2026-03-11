@@ -9,27 +9,26 @@ export const DuoMascotPath = `<img src="/duo-icon.svg" alt="Duo Path" style="wid
 
 export function Sidebar(activePage: string) {
   const navItems = [
-    { id: 'learn', icon: icons.learn, label: 'Learn', path: '/learn' },
-    { id: 'letters', icon: icons.letters, label: 'Letters', path: '/letters' },
-    { id: 'leaderboard', icon: icons.shield, label: 'Leaderboards', path: '/leaderboard' },
-    { id: 'quests', icon: icons.quests, label: 'Quests', path: '/quests' },
-    { id: 'shop', icon: icons.shop, label: 'Shop', path: '/shop' },
-    { id: 'profile', icon: icons.profile, label: 'Profile', path: '/profile' },
-    { id: 'settings', icon: icons.more, label: 'More', path: '/settings' },
+    { id: 'learn', icon: icons.learn, label: 'LEARN', path: '/learn' },
+    { id: 'letters', icon: icons.letters, label: 'LETTERS', path: '/letters' },
+    { id: 'leaderboard', icon: icons.leaderboard, label: 'LEADERBOARDS', path: '/leaderboard' },
+    { id: 'quests', icon: icons.quests, label: 'QUESTS', path: '/quests' },
+    { id: 'shop', icon: icons.shop, label: 'SHOP', path: '/shop' },
+    { id: 'profile', icon: icons.profile, label: 'PROFILE', path: '/profile' },
+    { id: 'settings', icon: icons.more, label: 'MORE', path: '/settings' },
   ];
 
   return `
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-logo" onclick="window.__router.navigate('/learn')" style="display:flex; align-items:center; gap:8px;">
+      <div class="sidebar-logo" onclick="window.__router.navigate('/learn')">
         ${icons.duolingoTextLogo}
-        <img src="/duo-icon.svg" style="width: 32px; height: 32px; animation: floatRotate 4s infinite alternate ease-in-out;" alt="Duo" />
       </div>
       <nav class="sidebar-nav">
         ${navItems.map(item => `
           <div class="nav-item ${activePage === item.id ? 'active' : ''}" 
                onclick="window.__router.navigate('${item.path}')" id="nav-${item.id}">
             <span class="nav-icon">${item.icon}</span>
-            <span class="nav-text">${item.label}</span>
+            <span class="nav-text" style="font-weight: 800; font-size: 15px;">${item.label}</span>
           </div>
         `).join('')}
       </nav>
