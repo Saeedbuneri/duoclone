@@ -1,0 +1,21 @@
+{
+  "socials": [
+    {
+      "href": "https://www.instagram.com/duolingo",
+      "svg": "Instagram"
+    },
+    {
+      "href": "https://www.tiktok.com/@duolingo",
+      "svg": "TikTok"
+    },
+    {
+      "href": "https://twitter.com/duolingo",
+      "svg": "Twitter"
+    },
+    {
+      "href": "https://www.youtube.com/user/duolingo",
+      "svg": "YouTube"
+    }
+  ],
+  "logo": ""
+}

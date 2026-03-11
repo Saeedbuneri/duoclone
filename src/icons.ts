@@ -2,15 +2,15 @@ export const icons = {
     // ===== SIDEBAR ICONS =====
     duoLogo: `<svg class="duo-icon" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" fill="#58CC02"/><path d="M16 8c-2.5 0-4.5 1-5.5 3-.7 1.4-.5 3 .5 4.2.6.7 1 1.5 1 2.3V19h8v-1.5c0-.8.4-1.6 1-2.3 1-1.2 1.2-2.8.5-4.2C20.5 9 18.5 8 16 8z" fill="white"/><rect x="12" y="20" width="8" height="2" rx="1" fill="white"/><rect x="13" y="23" width="6" height="1.5" rx=".75" fill="white"/></svg>`,
     duolingoTextLogo: `<span class="duo-text-logo" style="font-family:'DIN Round Pro','Nunito',Arial,sans-serif;font-size:24px;font-weight:800;color:#58CC02;letter-spacing:-0.5px;user-select:none;">duolingo</span>`,
-    learn: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/784035717e2ff1d448c0f6cc4efc89fb.svg" alt="Learn" />`,
-    letters: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/6cedcfdc3882736b4124fc8b907fe23f.svg" alt="Letters" />`,
-    shield: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/45f8f8702b37805822ee4cf140a3594b.svg" alt="Shield" />`,
-    leaderboard: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/45f8f8702b37805822ee4cf140a3594b.svg" alt="Leaderboard" />`,
-    quests: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/7ef36bae3f9d68fc763d3451b5167836.svg" alt="Quests" />`,
-    shop: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/0e58a94dda219766d98c7796b910beee.svg" alt="Shop" />`,
-    profile: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/57134aa8f9a94132038e21aa8addb35f.svg" alt="Profile" />`,
-    more: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/72bc58ba9cbb750fc7bbf7fc8fc1de4e.svg" alt="More" />`,
-    settings: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/72bc58ba9cbb750fc7bbf7fc8fc1de4e.svg" alt="Settings" />`,
+    learn: `<img class="duo-icon" src="/icon-learn.svg" alt="Learn" />`,
+    letters: `<img class="duo-icon" src="/icon-letters.svg" alt="Letters" />`,
+    shield: `<img class="duo-icon" src="/icon-leaderboard.svg" alt="Shield" />`,
+    leaderboard: `<img class="duo-icon" src="/icon-leaderboard.svg" alt="Leaderboard" />`,
+    quests: `<img class="duo-icon" src="/icon-quests.svg" alt="Quests" />`,
+    shop: `<img class="duo-icon" src="/icon-shop.svg" alt="Shop" />`,
+    profile: `<img class="duo-icon" src="/icon-profile.svg" alt="Profile" />`,
+    more: `<img class="duo-icon" src="/icon-more.svg" alt="More" />`,
+    settings: `<img class="duo-icon" src="/icon-more.svg" alt="Settings" />`,
 
     // ===== TOP STATS ICONS (Official Duolingo CDN) =====
     streak: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/icons/398e4298a3b39ce566050e5c041949ef.svg" onerror="this.src='https://d35aaqx5ub95lt.cloudfront.net/images/icons/ba95e6081679d9d7e8c132da5cfce1ec.svg'"/>`,
@@ -20,7 +20,7 @@ export const icons = {
     // ===== PATH NODE ICONS (Official Duolingo CDN & SVGs) =====
     starActive: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ef9c771afdb674f0ff82fae25c6a7b0a.svg" />`,
     starLocked: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/ddd21f172a2db0f5ef169c09b4d3badb.svg" style="opacity: 0.6; transform: scale(1.2);" />`,
-    chest: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/vendor/7ef36bae3f9d68fc763d3451b5167836.svg" style="transform: scale(1.3);" />`,
+    chest: `<img class="duo-icon" src="/icon-quests.svg" style="transform: scale(1.3);" />`,
     trophy: `<img class="duo-icon" src="https://d35aaqx5ub95lt.cloudfront.net/images/path/icons/7d84afaa096ff1f1d3f8c86d6c2c9542.svg" style="transform: scale(1.2);" />`,
     checkmark: `<svg class="duo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`,
 
