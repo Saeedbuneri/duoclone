@@ -3276,3 +3276,47 @@ ul {
   border-right: 10px solid var(--duo-white);
 }
 
+
+/* ===== REFINED SIDEBAR (Exact Duolingo Sizes) ===== */
+.sidebar {
+  width: 256px !important;
+  padding: 16px 24px;
+}
+.sidebar-logo {
+  padding: 8px 16px 32px 16px;
+}
+.nav-item {
+  padding: 8px 16px !important;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  gap: 20px !important;
+}
+.nav-item:hover {
+  background: var(--duo-gray-200);
+}
+.nav-item.active {
+  background: #E5F3FF;
+  color: var(--duo-blue);
+  border: 2px solid #84D8FF;
+}
+.nav-item .duo-icon {
+  width: 32px;
+  height: 32px;
+}
+.nav-text {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--duo-gray-500);
+}
+.nav-item.active .nav-text {
+  color: var(--duo-blue);
+}
+
+.right-panel {
+  width: 368px !important;
+  padding-top: 24px;
+}
+
