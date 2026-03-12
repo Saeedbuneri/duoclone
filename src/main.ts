@@ -21,6 +21,7 @@ import { playSound } from './audio';
 
 // Initialize global state
 AppState.init();
+(window as any).AppState = AppState;
 
 // Setup router
 const router = new Router('#app');
