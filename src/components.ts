@@ -53,7 +53,7 @@ export function Sidebar(activePage: string) {
               HELP
             </button>
             <hr style="border: none; border-top: 2px solid #E5E5E5; margin: 4px 0;" />
-            <button onclick="window.AppState.logout()" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #FF4B4B; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#FFDFDF'" onmouseout="this.style.background='none'">
+            <button onclick="window.AppState.logout(); window.__router.navigate('/');" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #FF4B4B; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#FFDFDF'" onmouseout="this.style.background='none'">
               <div style="font-size: 20px;">🚪</div>
               LOGOUT
             </button>
