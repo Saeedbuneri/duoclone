@@ -19,6 +19,12 @@ export interface UserState {
     dailyGoal: number;
     league: string;
     isPremium: boolean;
+    items: {
+        streakFreeze: number;
+        doubleOrNothing: boolean;
+        unlimitedHeartsExpiry: number | null;
+        xpBoostExpiry: number | null;
+    };
     progress: Record<string, LanguageProgress>;
 }
 
@@ -40,6 +46,12 @@ const createDefaultUser = (email: string, name: string): UserState => ({
     dailyGoal: 10,
     league: 'Bronze',
     isPremium: false,
+    items: {
+        streakFreeze: 0,
+        doubleOrNothing: false,
+        unlimitedHeartsExpiry: null,
+        xpBoostExpiry: null
+    },
     progress: {}
 });
 

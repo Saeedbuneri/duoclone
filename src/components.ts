@@ -15,7 +15,6 @@ export function Sidebar(activePage: string) {
     { id: 'quests', icon: icons.quests, label: 'QUESTS', path: '/quests' },
     { id: 'shop', icon: icons.shop, label: 'SHOP', path: '/shop' },
     { id: 'profile', icon: icons.profile, label: 'PROFILE', path: '/profile' },
-    { id: 'settings', icon: icons.more, label: 'MORE', path: '/settings' },
   ];
 
   return `
@@ -31,6 +30,52 @@ export function Sidebar(activePage: string) {
             <span class="nav-text" style="font-weight: 800; font-size: 15px;">${item.label}</span>
           </div>
         `).join('')}
+        
+        <!-- MORE Dropdown -->
+        <div style="position: relative;" id="sidebar-more-container">
+          <div class="nav-item ${activePage === 'settings' ? 'active' : ''}" 
+               onclick="document.getElementById('more-popover').classList.toggle('show');" id="nav-more">
+            <span class="nav-icon">${icons.more}</span>
+            <span class="nav-text" style="font-weight: 800; font-size: 15px;">MORE</span>
+          </div>
+          
+          <div id="more-popover" style="position: absolute; bottom: 0; left: 100%; margin-left: -10px; background: white; border: 2px solid #E5E5E5; border-radius: 16px; padding: 12px; width: 280px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 200; display: none; flex-direction: column; gap: 4px;">
+            <button onclick="window.__router.navigate('/about')" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #777; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background='none'">
+              <div style="font-size: 20px;">🎒</div>
+              SCHOOLS
+            </button>
+            <button onclick="window.__router.navigate('/settings')" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #777; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background='none'">
+              <div style="font-size: 20px;">⚙️</div>
+              SETTINGS
+            </button>
+            <button onclick="window.__router.navigate('/profile')" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #777; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background='none'">
+              <div style="font-size: 20px;">❓</div>
+              HELP
+            </button>
+            <hr style="border: none; border-top: 2px solid #E5E5E5; margin: 4px 0;" />
+            <button onclick="window.AppState.logout()" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #FF4B4B; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#FFDFDF'" onmouseout="this.style.background='none'">
+              <div style="font-size: 20px;">🚪</div>
+              LOGOUT
+            </button>
+          </div>
+          
+          <style>
+            #more-popover.show {
+              display: flex !important;
+            }
+          </style>
+          
+          <script>
+            // Close popover when clicking outside
+            document.addEventListener('click', function(e) {
+              const container = document.getElementById('sidebar-more-container');
+              const popover = document.getElementById('more-popover');
+              if (container && popover && !container.contains(e.target) && popover.classList.contains('show')) {
+                popover.classList.remove('show');
+              }
+            });
+          </script>
+        </div>
       </nav>
     </aside>
   `;
@@ -40,7 +85,7 @@ export function TopStats() {
   const s = AppState.user;
   const flag = flagIcons[s.language] || icons.flag_globe;
   return `
-    <div class="top-stats">
+    <div class="top-stats" id="main-top-bar">
       <div class="stat-item flag" title="${s.language}" onclick="window.showModal('flag-modal')">
         <span class="stat-icon">${flag}</span>
       </div>
@@ -112,6 +157,20 @@ export function RightPanelWidgets() {
       <h3>Create a profile to save your progress!</h3>
       <button class="btn btn-green btn-full" onclick="window.__router.navigate('/register')">CREATE A PROFILE</button>
       <button class="btn btn-blue btn-full" onclick="window.__router.navigate('/login')">SIGN IN</button>
+    </div>` : ''}
+
+    ${AppState.user.isLoggedIn && !AppState.user.isPremium ? `
+    <div class="widget super-widget animate-in" style="animation-delay:0.15s; border: none; padding: 0; display: block; overflow: hidden; border-radius: 16px;">
+      <div style="background: linear-gradient(135deg, rgba(137, 226, 25, 0.1), rgba(88, 204, 2, 0.1)); padding: 20px; border: 2px solid #E5E5E5; border-radius: 16px; border-bottom-width: 4px; display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: transform 0.1s;" onclick="window.__router.navigate('/super')">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <img src="/duo-icon.svg" style="width: 40px; height: 40px;" alt="Super Duo" />
+          <div>
+            <h3 style="font-size: 16px; font-weight: 800; color: #4B4B4B; margin-bottom: 2px;">Try Super for $0</h3>
+            <p style="font-size: 14px; font-weight: 600; color: #777;">No ads, personalized practice, and unlimited hearts!</p>
+          </div>
+        </div>
+        <button class="btn btn-green btn-full" style="padding: 10px; font-size: 14px;">TRY 2 WEEKS FREE</button>
+      </div>
     </div>` : ''}
 
     <div class="app-footer animate-in" style="animation-delay:0.2s">

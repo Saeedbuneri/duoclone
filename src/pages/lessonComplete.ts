@@ -25,7 +25,9 @@ export function LessonCompletePage() {
       <!-- Confetti base (CSS animated) -->
       <div id="confetti-container" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;"></div>
       
-      <div class="complete-icon animate-in" style="font-size: 100px; animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); position:relative; z-index:2;">🎉</div>
+      <div class="complete-animation animate-in" style="margin-bottom: 20px; position:relative; z-index:2;">
+        <img src="/assets/animations/crown_duo.gif" style="width: 200px; border-radius: 24px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);" alt="Lesson Complete!" />
+      </div>
       <h2 class="animate-in" style="animation-delay: 0.2s; position:relative; z-index:2;">Lesson Complete!</h2>
       <p class="animate-in" style="animation-delay: 0.3s; position:relative; z-index:2;">Amazing work! You're building a great streak!</p>
       

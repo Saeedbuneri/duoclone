@@ -123,8 +123,8 @@ function render() {
     </div>
     <div class="onboarding-content">
       <div class="onboarding-mascot">
-        ${DuoSmall}
-        <div class="mascot-bubble">${step.question}</div>
+        <div class="mascot-img" style="animation: duoDance 4s infinite alternate ease-in-out; cursor: pointer;" onclick="playSound('click')">${DuoSmall}</div>
+        <div class="mascot-bubble animate-in" style="animation-duration: 0.4s;">${step.question}</div>
       </div>
       ${optionsHtml}
     </div>

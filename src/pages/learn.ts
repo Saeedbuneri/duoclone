@@ -16,6 +16,7 @@ interface Unit {
   unit: number;
   title: string;
   color: string;
+  character?: string;
   dividerText?: string;
   nodes: PathNode[];
 }
@@ -39,6 +40,8 @@ function generateUnitsForLanguage(langName: string): Unit[] {
   ];
   const colors = ['#58CC02', '#CE82FF', '#1CB0F6', '#FF9600', '#FF4B4B', '#00CD9C'];
 
+  const sectionCharacters = ['🦉', '💜', '💖', '🎨', '🐻', '👦', '🎓', '✨'];
+  
   let globalId = 1;
   return Array.from({ length: 30 }).map((_, unitIdx) => {
     const section = Math.floor(unitIdx / 4) + 1;
@@ -55,6 +58,7 @@ function generateUnitsForLanguage(langName: string): Unit[] {
       unit: unitIdx + 1,
       title: title,
       color: colors[unitIdx % colors.length],
+      character: sectionCharacters[unitIdx % sectionCharacters.length],
       dividerText: isFirstInSection && unitIdx > 0 ? title : undefined,
       nodes: nodeNames.map((name, i) => {
         let type: PathNode['type'] = 'lesson';
@@ -98,17 +102,42 @@ export function LearnPage() {
   const units = generateUnitsForLanguage(lang);
 
   let globalIdx = 0;
-  units.forEach(unit => {
-    unit.nodes.forEach(node => {
-      if (globalIdx < completed) node.status = 'completed';
-      else if (globalIdx === completed) node.status = 'active';
-      else node.status = 'locked';
+  let currentSection = 1;
+  
+  // First pass: find current section based on completed nodes
+  units.forEach((unit) => {
+    unit.nodes.forEach(() => {
+      if (globalIdx === completed) {
+         currentSection = unit.section;
+      }
+      globalIdx++;
+    });
+  });
+
+  const viewStartSection = Math.floor((currentSection - 1) / 2) * 2 + 1;
+  const visibleUnits = units.filter(u => u.section === viewStartSection || u.section === viewStartSection + 1);
+
+  globalIdx = 0;
+  units.forEach((unit) => {
+    unit.nodes.forEach((node, nIdx) => {
+      if (globalIdx < completed) {
+        node.status = 'completed';
+      } else if (globalIdx === completed) {
+        node.status = 'active';
+      } else {
+        // Unlock first lesson of every single unit, ONLY if its section is unlocked
+        if (unit.section <= currentSection && nIdx === 0) {
+          node.status = 'active';
+        } else {
+          node.status = 'locked';
+        }
+      }
       node.globalIdx = globalIdx;
       globalIdx++;
     });
   });
 
-  const pathHtml = units.map((unit) => {
+  const pathHtml = visibleUnits.map((unit) => {
     const divider = unit.dividerText ? `
       <div class="section-divider animate-in">
         <span>${unit.dividerText}</span>
@@ -121,56 +150,119 @@ export function LearnPage() {
           <h2>← SECTION ${unit.section}, UNIT ${unit.unit}</h2>
           <h3>${unit.title}</h3>
         </div>
-        <button class="guidebook-btn" onclick="showGuidebook(${unit.unit}, '${unit.title.replace(/'/g, "\\'")}', '${unit.color}')">
+        <div class="section-character">
+          <span>${unit.character || '🦉'}</span>
+        </div>
+        <button class="guidebook-btn" onclick="showGuidebook(${unit.unit}, '${unit.title.replace(/'/g, "\\'")}', '${unit.color}')" style="position:relative; z-index:2;">
           <div style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${icons.guidebook}</div>
           <span>GUIDEBOOK</span>
         </button>
       </div>
     `;
 
-    const nodesHtml = unit.nodes.map((node, i) => {
-      const showStartTooltip = node.status === 'active';
-      const showMascot = node.status === 'active';
-      const bgColor = getNodeBgColor(node);
-      const shadowColor = getNodeShadowColor(node);
-      const nodeIcon = getNodeIcon(node);
+    const nodeYSpacing = 110;
+    
+    const totalHeight = Math.max(0, (unit.nodes.length - 1) * nodeYSpacing + 90);
 
-      const ringClass = node.status === 'active' ? 'active-ring' :
-        node.status === 'completed' ? 'completed-ring' : '';
+    const nodesHtml = `
+      <div style="position: relative; width: 300px; height: ${totalHeight}px; margin: 0 auto;">
 
-      // Alternate node offset logic for snake path
-      const horizontalOffset = Math.sin(i * 1.0) * 45;
 
-      return `
-        <div class="path-node" id="node-${node.id}" style="transform: translateX(${horizontalOffset}px);">
-          ${showStartTooltip ? '<div class="start-tooltip">START</div>' : ''}
-          <div class="node-ring ${ringClass}">
-            <button class="node-btn" 
-                    style="background:${bgColor};box-shadow:0 6px 0 ${shadowColor};${node.status === 'locked' ? 'cursor:default;' : ''}"
-                    onclick="${node.status !== 'locked' ? `togglePopup(${node.id})` : ''}"
-                    ${node.status === 'locked' ? 'disabled' : ''}>
-              ${nodeIcon}
-            </button>
-          </div>
-          ${node.status !== 'locked' ? `
-          <div class="start-popup" id="popup-${node.id}">
-            <h4>${node.name}</h4>
-            <p>Lesson ${i + 1} of ${unit.nodes.length}</p>
-            <button class="btn btn-full" onclick="startLesson(${node.globalIdx})" style="background: white; color: var(--duo-green); box-shadow: 0 4px 0 #E5E5E5; border: none; font-weight: 800; font-size: 15px;">
-              ${node.status === 'completed' ? 'PRACTICE' : 'START +10 XP'}
-            </button>
-          </div>` : ''}
-          ${showMascot ? `<div class="path-mascot-inline" style="position:absolute; right: -75px; top: 10px; animation: floatRotate 3.5s infinite alternate ease-in-out; pointer-events: none; z-index: 5; transform: scale(0.9);">${DuoMascotPath}</div>` : ''}
-          ${i < unit.nodes.length - 1 ? `<div class="path-connector ${node.status === 'completed' ? 'active' : ''}"></div>` : ''}
+        ${unit.nodes.map((node, i) => {
+          const showStartTooltip = node.status === 'active';
+          const showMascot = node.status === 'active';
+          const bgColor = getNodeBgColor(node);
+          const shadowColor = getNodeShadowColor(node);
+          const nodeIcon = getNodeIcon(node);
+
+          const ringClass = node.status === 'active' ? 'active-ring' :
+            node.status === 'completed' ? 'completed-ring' : '';
+
+          const offsetX = Math.sin(i * 0.8) * 25;
+          const leftPos = 150 + offsetX - 43; // 43 is half of the ring width (86/2)
+          const topPos = i * nodeYSpacing;
+
+          const isSpecialNode = node.type === 'chest' || node.type === 'trophy';
+          let nodeElement = '';
+
+          if (isSpecialNode) {
+            const filterStyle = node.status === 'locked' ? 'filter: grayscale(1) opacity(0.7);' : '';
+            let svgContent = '';
+            
+            if (node.type === 'chest') {
+              svgContent = icons.chest;
+            } else if (node.type === 'trophy') {
+              svgContent = `<svg width="80" height="80" viewBox="0 0 100 100" fill="none" style="margin-left:5px"><path d="M20 20 H80 V40 C80 60 55 70 55 70 V85 H70 V95 H30 V85 H45 V70 C45 70 20 60 20 40 Z" fill="${node.status === 'locked' ? '#E5E5E5' : '#FFC800'}" stroke="${node.status === 'locked' ? '#C4C4C4' : '#CD7900'}" stroke-width="5" stroke-linejoin="round"/><path d="M8 20 H20 V40 H8 C5 40 5 20 8 20 Z" fill="none" stroke="${node.status === 'locked' ? '#C4C4C4' : '#CD7900'}" stroke-width="5" stroke-linejoin="round"/><path d="M92 20 H80 V40 H92 C95 40 95 20 92 20 Z" fill="none" stroke="${node.status === 'locked' ? '#C4C4C4' : '#CD7900'}" stroke-width="5" stroke-linejoin="round"/></svg>`;
+            }
+
+            nodeElement = `
+              <div class="special-node-container" style="${filterStyle} cursor: ${node.status === 'locked' ? 'default' : 'pointer'}; display: flex; align-items: center; justify-content: center; width: 86px; height: 86px;" 
+                   onclick="${node.status !== 'locked' ? `togglePopup(${node.id})` : ''}">
+                ${svgContent}
+              </div>
+            `;
+          } else {
+            nodeElement = `
+              <div class="node-ring ${ringClass}">
+                <button class="node-btn" 
+                        style="background:${bgColor};box-shadow:0 6px 0 ${shadowColor};${node.status === 'locked' ? 'cursor:default;' : ''}"
+                        onclick="${node.status !== 'locked' ? `togglePopup(${node.id})` : ''}"
+                        ${node.status === 'locked' ? 'disabled' : ''}>
+                  ${nodeIcon}
+                </button>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="path-node" id="node-${node.id}" style="position: absolute; left: ${leftPos}px; top: ${topPos}px; width: 86px; margin: 0;">
+              ${showStartTooltip ? '<div class="start-tooltip">START</div>' : ''}
+              ${nodeElement}
+              ${node.status !== 'locked' ? `
+              <div class="start-popup" id="popup-${node.id}">
+                <h4>${node.name}</h4>
+                <p>Lesson ${i + 1} of ${unit.nodes.length}</p>
+                <button class="btn btn-full" onclick="startLesson(${node.globalIdx})" style="background: white; color: var(--duo-green); box-shadow: 0 4px 0 #E5E5E5; border: none; font-weight: 800; font-size: 15px;">
+                  ${node.status === 'completed' ? 'PRACTICE' : 'START +10 XP'}
+                </button>
+              </div>` : ''}
+              ${showMascot ? `<div class="path-mascot-inline" style="position:absolute; right: -75px; top: 10px; animation: floatRotate 3.5s infinite alternate ease-in-out; pointer-events: none; z-index: 5; transform: scale(0.9);">${DuoMascotPath}</div>` : ''}
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+
+    return `
+      <div class="unit-container" style="position: relative;">
+        ${divider}
+        ${sectionHeader}
+        <div class="path-container" style="padding-top: 32px; padding-bottom: 64px;">
+          ${nodesHtml}
         </div>
-      `;
-    }).join('');
-
-    return `${divider}${sectionHeader}<div class="path-container" style="padding-top: 32px; padding-bottom: 64px;">${nodesHtml}</div>`;
+      </div>
+    `;
   }).join('');
 
+  const visibleNodesCount = visibleUnits.reduce((acc, u) => acc + u.nodes.length, 0);
+  let visibleCompletedCount = 0;
+  visibleUnits.forEach(u => u.nodes.forEach(n => { if (n.status === 'completed') visibleCompletedCount++; }));
+  const visibleProgressPercent = visibleNodesCount > 0 ? Math.round((visibleCompletedCount / visibleNodesCount) * 100) : 0;
+  
+  const nextSectionPairStart = viewStartSection + 2;
+  const nextSectionBar = `
+    <div class="next-section-teaser animate-in" style="margin: 0px 0px 80px; padding: 24px; border: 2px solid var(--duo-gray-200); border-radius: var(--duo-radius-lg); text-align: center; background: var(--duo-white); border-bottom: 4px solid var(--duo-gray-200);">
+       <div style="font-size: 40px; margin-bottom: 16px; opacity: 0.5;">🔒</div>
+       <h3 style="font-size: 20px; font-weight: 800; color: var(--duo-gray-500); margin-bottom: 8px;">Sections ${nextSectionPairStart} & ${nextSectionPairStart + 1} Locked</h3>
+       <p style="font-size: 15px; color: var(--duo-gray-400); font-weight: 600;">Complete Sections ${viewStartSection} and ${viewStartSection + 1} to unlock the next part of your journey!</p>
+       <div style="margin-top: 20px; height: 16px; background: var(--duo-gray-200); border-radius: 8px; overflow: hidden; display: flex;">
+          <div style="width: ${visibleProgressPercent}%; background: var(--duo-green); border-radius: 8px; transition: width 0.5s ease;"></div>
+       </div>
+    </div>
+  `;
+
   return {
-    html: AppLayout('learn', pathHtml, RightPanelWidgets()),
+    html: AppLayout('learn', pathHtml + nextSectionBar, RightPanelWidgets()),
     init() {
       (window as any).showGuidebook = (unit: number, title: string, color: string) => {
         const container = document.getElementById('global-modals');
@@ -241,6 +333,17 @@ export function LearnPage() {
       };
 
       (window as any).startLesson = (idx: number) => {
+        const isPremium = AppState.user.isPremium;
+        const hasUnlimited = AppState.user.items && AppState.user.items.unlimitedHeartsExpiry && AppState.user.items.unlimitedHeartsExpiry > Date.now();
+        const hasHearts = isPremium || hasUnlimited || AppState.user.hearts > 0;
+        
+        if (!hasHearts) {
+          (window as any).duoAlert("You don't have enough hearts to start a lesson! Go to the shop to refill.", "💔", "GO TO SHOP", "btn-blue").then(() => {
+            window.__router.navigate('/shop');
+          });
+          return;
+        }
+        
         sessionStorage.setItem('targetLessonIdx', idx.toString());
         window.__router.navigate('/lesson');
       };
@@ -261,6 +364,14 @@ export function LearnPage() {
           activePopup = null;
         }
       });
+      
+      // Scroll to active lesson
+      setTimeout(() => {
+        const activeNode = document.querySelector('.active-ring');
+        if (activeNode) {
+          activeNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
     }
   };
 }

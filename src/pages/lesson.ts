@@ -54,10 +54,26 @@ function renderQuestion() {
   const q = activeQuestions[currentQ];
   const progress = ((currentQ) / activeQuestions.length) * 100;
   const isPremium = AppState.user.isPremium;
-  const hearts = isPremium ? '∞' : AppState.user.hearts;
+  const hasUnlimited = AppState.user.items && AppState.user.items.unlimitedHeartsExpiry && AppState.user.items.unlimitedHeartsExpiry > Date.now();
+  const hearts = (isPremium || hasUnlimited) ? '∞' : AppState.user.hearts;
 
   const container = document.getElementById('lesson-container');
   if (!container) return;
+
+  if (hearts === 0 && !isChecked) {
+    container.innerHTML = `
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; padding: 20px; background: white;">
+        <div style="font-size: 80px; margin-bottom: 20px;">💔</div>
+        <h2 style="font-size: 28px; font-weight: 800; color: #4B4B4B; margin-bottom: 12px;">You're out of hearts!</h2>
+        <p style="font-size: 17px; color: #777; margin-bottom: 32px; max-width: 400px; line-height: 1.5;">Refill your hearts to keep learning, or try Super Duolingo for unlimited hearts.</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 300px;">
+           <button class="btn btn-blue btn-full" onclick="window.__router.navigate('/shop')">REFILL HEARTS</button>
+           <button class="btn btn-white btn-full" onclick="window.__router.navigate('/learn')">END SESSION</button>
+        </div>
+      </div>
+    `;
+    return;
+  }
 
   let questionContent = '';
 
@@ -155,15 +171,21 @@ function renderQuestion() {
 
   if (isChecked) {
     footerClass = isCorrect ? 'correct-footer' : 'wrong-footer';
+    const mascotHtml = isCorrect 
+      ? `<img src="/assets/animations/muddy_buddy.gif" style="width: 150px; height: 150px; object-fit: contain; margin-top: -60px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));" />` 
+      : `<img src="/assets/animations/crying_baby.gif" style="width: 150px; height: 150px; object-fit: contain; margin-top: -60px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));" />`;
     footerContent = `
-      <div class="lesson-result">
+      <div class="feedback-mascot" style="margin-right: 24px;">
+        ${mascotHtml}
+      </div>
+      <div class="lesson-result" style="flex: 1;">
         <div class="lesson-result-text ${isCorrect ? 'correct-text' : 'wrong-text'}">
           ${isCorrect ? '✓ Correct!' : '✗ Incorrect'}
         </div>
         ${!isCorrect ? `<div class="lesson-result-detail" style="color:#EA2B2B">Correct answer: <strong>${q.correctAnswer}</strong></div>` : ''}
         ${isCorrect && score.streak > 1 ? `<div class="lesson-result-detail" style="color:#58A700">🔥 ${score.streak} in a row!</div>` : ''}
       </div>
-      <button class="btn ${isCorrect ? 'btn-green' : 'btn-blue'}" onclick="nextQuestion()">CONTINUE</button>
+      <button class="btn ${isCorrect ? 'btn-green' : 'btn-red'}" onclick="nextQuestion()">CONTINUE</button>
     `;
   } else {
     footerContent = `
@@ -309,7 +331,9 @@ export function LessonPage() {
         } else {
           score.wrong++;
           score.streak = 0;
-          if (!AppState.user.isPremium) {
+          const isPremium = AppState.user.isPremium;
+          const hasUnlimited = AppState.user.items && AppState.user.items.unlimitedHeartsExpiry && AppState.user.items.unlimitedHeartsExpiry > Date.now();
+          if (!isPremium && !hasUnlimited) {
             AppState.update({ hearts: Math.max(0, AppState.user.hearts - 1) });
           }
         }

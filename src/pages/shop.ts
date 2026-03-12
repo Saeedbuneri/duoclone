@@ -44,11 +44,13 @@ export function ShopPage() {
           <div class="item-icon">❄️</div>
           <div class="item-info">
             <h4>Streak Freeze</h4>
-            <p>Streak Freeze allows your streak to remain in place for one full day of inactivity</p>
+            <p>Streak Freeze allows your streak to remain in place for one full day of inactivity (${s.items?.streakFreeze || 0}/2)</p>
           </div>
-          <button class="item-price" onclick="buyItem('freeze', 200)" style="display:flex;align-items:center;gap:4px;justify-content:center">
-            <div style="width:16px;height:16px;line-height:0">${icons.gems}</div> 200
-          </button>
+          ${(s.items?.streakFreeze || 0) >= 2 
+            ? `<div class="item-price" style="background: none; border: none; color: #AFAFAF; cursor: default;">MAXED OUT</div>`
+            : `<button class="item-price" onclick="buyItem('freeze', 200)" style="display:flex;align-items:center;gap:4px;justify-content:center">
+                 <div style="width:16px;height:16px;line-height:0">${icons.gems}</div> 200
+               </button>`}
         </div>
         <div class="shop-item">
           <div class="item-icon">⏱️</div>
@@ -56,9 +58,11 @@ export function ShopPage() {
             <h4>Double or Nothing</h4>
             <p>Attempt to double a 50 Gem wager by maintaining a 7 day streak</p>
           </div>
-          <button class="item-price" onclick="buyItem('double', 50)" style="display:flex;align-items:center;gap:4px;justify-content:center">
-            <div style="width:16px;height:16px;line-height:0">${icons.gems}</div> 50
-          </button>
+          ${s.items?.doubleOrNothing 
+            ? `<div class="item-price" style="background: none; border: none; color: #1CB0F6; cursor: default; box-shadow: none;">ACTIVE</div>`
+            : `<button class="item-price" onclick="buyItem('double', 50)" style="display:flex;align-items:center;gap:4px;justify-content:center">
+                 <div style="width:16px;height:16px;line-height:0">${icons.gems}</div> 50
+               </button>`}
         </div>
         <div class="shop-item">
           <div class="item-icon">⚡</div>
@@ -162,7 +166,21 @@ export function ShopPage() {
           repair: 'Streak repaired! 🔮',
         };
         AppState.update({ gems: s.gems - cost });
-        if (type === 'hearts') AppState.update({ hearts: 5 });
+        
+        let items = { ...s.items };
+        if (type === 'hearts') {
+           AppState.update({ hearts: Math.min(5, s.hearts + 5) });
+        } else if (type === 'unlimited') {
+           items.unlimitedHeartsExpiry = Date.now() + 24 * 60 * 60 * 1000;
+        } else if (type === 'freeze') {
+           items.streakFreeze = Math.min(2, items.streakFreeze + 1);
+        } else if (type === 'double') {
+           items.doubleOrNothing = true;
+        } else if (type === 'xpboost') {
+           items.xpBoostExpiry = Date.now() + 15 * 60 * 1000;
+        }
+        AppState.update({ items });
+        
         (window as any).duoAlert(messages[type] || `Item purchased! 🎉`, '🎉', 'AWESOME!');
         window.__router.navigate('/shop');
       };

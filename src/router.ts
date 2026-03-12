@@ -36,10 +36,12 @@ export class Router {
             overlay.classList.add('lesson-loading');
             overlay.innerHTML = `
                 <div class="loading-screen-content">
+                    <img src="/assets/animations/park_ranger.gif" style="width: 150px; margin-bottom: 30px; border-radius: 20px;" alt="Loading..." />
                     <div class="loading-title">Getting your lesson ready...</div>
                     <div class="loading-progress-bar">
                         <div class="loading-progress-fill"></div>
                     </div>
+                    <div class="loading-tip" style="margin-top: 20px; color: #777; font-weight: 600; font-size: 15px; opacity: 0.8;">TIP: Consistency is key!</div>
                 </div>
             `;
         } else {
