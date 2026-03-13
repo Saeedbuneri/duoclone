@@ -3,6 +3,7 @@ import { icons } from '../icons';
 import type { QuestionData as Question } from '../lessonData';
 import { lessonContent, getGenericQuestions } from '../lessonData';
 import { playSound } from '../audio';
+import { animations } from '../animations';
 
 let isPracticeRound = false;
 
@@ -166,18 +167,21 @@ function renderQuestion() {
     `;
   }
 
+  // Mascot for the side
+  const mascotSrc = isChecked 
+    ? (isCorrect ? animations.crownDuo : animations.muddyBuddy)
+    : animations.duoMagic;
+  
+  const bubbleText = isChecked 
+    ? (isCorrect ? 'Correct! Keep it up!' : 'Not quite. Try again!') 
+    : (score.streak > 2 ? 'You are on fire!' : 'You can do this!');
+
   let footerClass = '';
   let footerContent = '';
 
   if (isChecked) {
     footerClass = isCorrect ? 'correct-footer' : 'wrong-footer';
-    const mascotHtml = isCorrect 
-      ? `<img src="/assets/animations/muddy_buddy.gif" style="width: 150px; height: 150px; object-fit: contain; margin-top: -60px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));" />` 
-      : `<img src="/assets/animations/crying_baby.gif" style="width: 150px; height: 150px; object-fit: contain; margin-top: -60px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));" />`;
     footerContent = `
-      <div class="feedback-mascot" style="margin-right: 24px;">
-        ${mascotHtml}
-      </div>
       <div class="lesson-result" style="flex: 1;">
         <div class="lesson-result-text ${isCorrect ? 'correct-text' : 'wrong-text'}">
           ${isCorrect ? '✓ Correct!' : '✗ Incorrect'}
@@ -205,8 +209,18 @@ function renderQuestion() {
         <span class="heart-count">${hearts}</span>
       </div>
     </div>
-    <div class="lesson-content animate-in">
-      ${questionContent}
+    <div class="lesson-layout-container">
+      <div class="lesson-mascot-sidebar">
+        <div class="mascot-bubble-side">
+          ${bubbleText}
+          <div class="bubble-tip"></div>
+          <div class="bubble-tip-inner"></div>
+        </div>
+        <img src="${mascotSrc}" class="mascot-img" />
+      </div>
+      <div class="lesson-content animate-in">
+        ${questionContent}
+      </div>
     </div>
     <div class="lesson-footer ${footerClass}">
       ${footerContent}

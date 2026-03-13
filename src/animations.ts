@@ -7,6 +7,10 @@ export const animations = {
   easterEgg: '/assets/animations/easter_egg.gif',
   masteryQuiz: '/assets/animations/mastery_quiz.gif',
   crownDuo: '/assets/animations/crown_duo.gif',
+  // New Lottie Animations
+  logoAnimation: '/src/animations/Duolingo Logo Animation.lottie',
+  duoAttack: '/src/animations/Duo Attack.lottie',
+  learningHowToAnimate: '/src/animations/Learning how to animate.lottie',
 };
 
 export const animationMeta = {
@@ -18,4 +22,7 @@ export const animationMeta = {
   easterEgg: 'An egg cracking to reveal the Duolingo logo.',
   masteryQuiz: 'Animation of the Mastery Quiz UI.',
   crownDuo: 'Duo wearing a crown and celebrating.',
+  logoAnimation: 'Duolingo Logo Splash Animation.',
+  duoAttack: 'Duo Attack animation for starting tests.',
+  learningHowToAnimate: 'Learning how to animate loop for unit dividers.',
 };
