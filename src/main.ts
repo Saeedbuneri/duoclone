@@ -1,6 +1,4 @@
 import './style.css';
-import '@dotlottie/player-component';
-import { animations } from './animations';
 import { Router } from './router';
 import { LandingPage } from './pages/landing';
 import { LoginPage } from './pages/login';
@@ -18,6 +16,7 @@ import { LettersPage } from './pages/letters';
 import { SuperPage } from './pages/super';
 import { AboutPage, BlogPage, StorePage, EfficacyPage, CareersPage, InvestorsPage, TermsPage, PrivacyPage } from './pages/info';
 import { SectionsPage } from './pages/sections';
+import { LogoutPage } from './pages/logout';
 import { AppState } from './state';
 import { playSound } from './audio';
 
@@ -50,19 +49,16 @@ router.addRoute('/investors', InvestorsPage);
 router.addRoute('/terms', TermsPage);
 router.addRoute('/privacy', PrivacyPage);
 router.addRoute('/sections', SectionsPage);
+router.addRoute('/logout', LogoutPage);
 router.start();
 
 // Remove initial loader
 const loader = document.getElementById('initial-loader');
 if (loader) {
-  loader.innerHTML = `
-    <dotlottie-player src="${animations.logoAnimation}" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
-    <div style="font-family:'Nunito',sans-serif;font-size:32px;font-weight:800;color:#58CC02;letter-spacing:-0.5px;margin-top:-40px;">dicto</div>
-  `;
   setTimeout(() => {
     loader.style.opacity = '0';
     setTimeout(() => loader.remove(), 400);
-  }, 4000); // 4 seconds splash
+  }, 3000); // 3000ms startup delay (3 seconds)
 }
 
 // Expose router globally for navigation

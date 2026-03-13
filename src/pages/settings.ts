@@ -28,6 +28,19 @@ export function SettingsPage() {
         </div>
         <button class="btn btn-blue btn-full" style="margin-top:10px" onclick="window.saveAccountSettings()">SAVE ACCOUNT SETTINGS</button>
       </div>
+
+      <!-- Hero Animation Section -->
+      <div class="animate-in" style="animation-delay: 0.08s; width: 100%; max-width: 600px; height: 320px; margin: 24px auto; background: var(--duo-gray-100); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid var(--duo-gray-200);">
+        <dotlottie-player
+          src="https://lottie.host/f260671d-2e0a-4fa3-b025-3469f78e5266/wxTSEn7e0x.lottie"
+          background="transparent"
+          speed="1"
+          style="width: 100%; height: 100%; transform: scale(1.1);"
+          loop
+          autoplay
+        ></dotlottie-player>
+      </div>
+
       <div class="settings-section animate-in" style="animation-delay:0.1s">
         <h3>Learning</h3>
         <div class="setting-row">
@@ -89,8 +102,18 @@ export function SettingsPage() {
       </div>
     </div>
   `;
+  const rightPanel = `
+    <div class="widget animate-in" style="animation-delay: 0.1s;">
+      <h3 style="margin-bottom: 12px;">Need Help?</h3>
+      <p style="font-size: 15px; color: #777; font-weight: 600; line-height: 1.5; margin-bottom: 16px;">
+        Have questions about your account or need technical support? Our help center is available 24/7.
+      </p>
+      <button class="btn btn-blue btn-full" style="font-size: 14px;">VISIT HELP CENTER</button>
+    </div>
+  `;
+
   return {
-    html: AppLayout('settings', content),
+    html: AppLayout('settings', content, rightPanel),
     init() {
       (window as any).saveAccountSettings = () => {
         const newName = (document.getElementById('setting-name') as HTMLInputElement).value;
@@ -119,11 +142,9 @@ export function SettingsPage() {
 
       (window as any).logoutUser = (purge = false) => {
         if (purge) {
-          AppState.reset();
-        } else {
-          AppState.logout();
+          sessionStorage.setItem('logout_purge', 'true');
         }
-        window.__router.navigate('/');
+        window.__router.navigate('/logout');
       };
     }
   };

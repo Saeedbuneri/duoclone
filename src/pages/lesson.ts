@@ -3,7 +3,6 @@ import { icons } from '../icons';
 import type { QuestionData as Question } from '../lessonData';
 import { lessonContent, getGenericQuestions } from '../lessonData';
 import { playSound } from '../audio';
-import { animations } from '../animations';
 
 let isPracticeRound = false;
 
@@ -168,13 +167,26 @@ function renderQuestion() {
   }
 
   // Mascot for the side
-  const mascotSrc = isChecked 
-    ? (isCorrect ? animations.crownDuo : animations.muddyBuddy)
-    : animations.duoMagic;
-  
+  // Wait, user said "just play muddy_buddy.gif when correct answer is given". 
+  // Let's refine:
+  let mascotHtml = '';
+  if (isChecked && isCorrect) {
+    mascotHtml = `<img src="/assets/animations/muddy_buddy.gif" class="mascot-img" />`;
+  } else if (isChecked && !isCorrect) {
+    // Show nothing or a static image? Usually you need feedback.
+    // I'll show a static version or nothing. 
+    // Actually, "just play muddy_buddy.gif when correct" might mean it only shows then.
+    mascotHtml = `<div style="width:160px; height:160px;"></div>`; 
+  } else {
+    // Idle state - remove duo_magic
+    mascotHtml = `<div style="width:160px; height:160px;"></div>`;
+  }
+
   const bubbleText = isChecked 
     ? (isCorrect ? 'Correct! Keep it up!' : 'Not quite. Try again!') 
     : (score.streak > 2 ? 'You are on fire!' : 'You can do this!');
+
+  const showBubble = isChecked && isCorrect; // Only show encouragement on success?
 
   let footerClass = '';
   let footerContent = '';
@@ -211,12 +223,14 @@ function renderQuestion() {
     </div>
     <div class="lesson-layout-container">
       <div class="lesson-mascot-sidebar">
+        ${showBubble ? `
         <div class="mascot-bubble-side">
           ${bubbleText}
           <div class="bubble-tip"></div>
           <div class="bubble-tip-inner"></div>
         </div>
-        <img src="${mascotSrc}" class="mascot-img" />
+        ` : ''}
+        ${mascotHtml}
       </div>
       <div class="lesson-content animate-in">
         ${questionContent}

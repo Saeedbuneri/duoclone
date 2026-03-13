@@ -2,7 +2,6 @@ import { AppLayout, RightPanelWidgets, DuoMascotPath } from '../components';
 import { AppState } from '../state';
 import { icons } from '../icons';
 import { getGuideData } from '../guideData';
-import { animations } from '../animations';
 
 interface PathNode {
   id: number;
@@ -146,16 +145,14 @@ export function LearnPage() {
     ` : '';
 
     const sectionHeader = `
-      <div class="section-header animate-in" style="background:${unit.color}; position: relative; overflow: hidden;">
-        <div class="section-header-info" style="cursor: pointer; position: relative; z-index: 2;" onclick="window.__router.navigate('/sections')">
-          <h2 style="text-shadow: 0 1px 2px rgba(0,0,0,0.1)">← SECTION ${unit.section}, UNIT ${unit.unit}</h2>
-          <h3 style="text-shadow: 0 1px 2px rgba(0,0,0,0.1)">${unit.title}</h3>
+      <div class="section-header animate-in" style="background:${unit.color}">
+        <div class="section-header-info" style="cursor: pointer;" onclick="window.__router.navigate('/sections')">
+          <h2>← SECTION ${unit.section}, UNIT ${unit.unit}</h2>
+          <h3>${unit.title}</h3>
         </div>
-        
-        <div class="section-lottie-container" style="position: absolute; right: -20px; top: -10px; width: 140px; height: 140px; transform: rotate(45deg); opacity: 0.9; pointer-events: none;">
-          <dotlottie-player src="${animations.learningHowToAnimate}" background="transparent" speed="0.8" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
+        <div class="section-character">
+          <span>${unit.character || '🦉'}</span>
         </div>
-
         <button class="guidebook-btn" onclick="showGuidebook(${unit.unit}, '${unit.title.replace(/'/g, "\\'")}', '${unit.color}')" style="position:relative; z-index:2;">
           <div style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;">${icons.guidebook}</div>
           <span>GUIDEBOOK</span>
@@ -346,25 +343,9 @@ export function LearnPage() {
           });
           return;
         }
-
-        // Duo Attack Animation Transition
-        const modalContainer = document.getElementById('global-modals');
-        if (modalContainer) {
-          modalContainer.innerHTML = `
-            <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 10000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease;">
-              <dotlottie-player src="${animations.duoAttack}" background="transparent" speed="1.2" style="width: 400px; height: 400px;" autoplay></dotlottie-player>
-            </div>
-          `;
-          
-          setTimeout(() => {
-            sessionStorage.setItem('targetLessonIdx', idx.toString());
-            window.__router.navigate('/lesson');
-            setTimeout(() => { modalContainer.innerHTML = ''; }, 500);
-          }, 1500);
-        } else {
-          sessionStorage.setItem('targetLessonIdx', idx.toString());
-          window.__router.navigate('/lesson');
-        }
+        
+        sessionStorage.setItem('targetLessonIdx', idx.toString());
+        window.__router.navigate('/lesson');
       };
 
       (window as any).togglePopup = (id: number) => {

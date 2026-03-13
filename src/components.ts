@@ -1,6 +1,5 @@
 import { AppState } from './state';
 import { icons, flagIcons } from './icons';
-import { animations } from './animations';
 
 export const DuoOwl = `<img src="/duo-icon.svg" alt="Duo Owl" style="width: 200px; height: auto; transform: scale(1.1);" />`;
 
@@ -20,9 +19,8 @@ export function Sidebar(activePage: string) {
 
   return `
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar-logo" onclick="window.__router.navigate('/learn')" style="padding: 24px 20px; height: 100px; display: flex; align-items: center; gap: 8px;">
-        <dotlottie-player src="${animations.logoAnimation}" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></dotlottie-player>
-        <div style="font-family:'Nunito',sans-serif;font-size:24px;font-weight:800;color:#58CC02;letter-spacing:-0.5px;">dicto</div>
+      <div class="sidebar-logo" onclick="window.__router.navigate('/learn')">
+        ${icons.duolingoTextLogo}
       </div>
       <nav class="sidebar-nav">
         ${navItems.map(item => `
@@ -42,9 +40,9 @@ export function Sidebar(activePage: string) {
           </div>
           
           <div id="more-popover" style="position: absolute; bottom: 0; left: 100%; margin-left: -10px; background: white; border: 2px solid #E5E5E5; border-radius: 16px; padding: 12px; width: 280px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 200; display: none; flex-direction: column; gap: 4px;">
-            <button onclick="window.__router.navigate('/about')" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #777; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background='none'">
-              <div style="font-size: 20px;">🎒</div>
-              SCHOOLS
+            <button onclick="window.__router.navigate('/login')" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #777; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background='none'">
+              <div style="font-size: 20px;">🎓</div>
+              DUOLINGO FOR SCHOOLS
             </button>
             <button onclick="window.__router.navigate('/settings')" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #777; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background='none'">
               <div style="font-size: 20px;">⚙️</div>
@@ -55,7 +53,7 @@ export function Sidebar(activePage: string) {
               HELP
             </button>
             <hr style="border: none; border-top: 2px solid #E5E5E5; margin: 4px 0;" />
-            <button onclick="window.AppState.logout(); window.__router.navigate('/');" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #FF4B4B; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#FFDFDF'" onmouseout="this.style.background='none'">
+            <button onclick="window.__router.navigate('/logout')" style="text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 800; color: #FF4B4B; border-radius: 12px; cursor: pointer; transition: background 0.1s; display: flex; align-items: center; gap: 12px;" onmouseover="this.style.background='#FFDFDF'" onmouseout="this.style.background='none'">
               <div style="font-size: 20px;">🚪</div>
               LOGOUT
             </button>

@@ -1,28 +1,19 @@
 export const animations = {
   duoMagic: '/assets/animations/duo_magic.gif',
   muddyBuddy: '/assets/animations/muddy_buddy.gif',
-  parkRanger: '/assets/animations/park_ranger.gif',
   streakCalendar: '/assets/animations/streak_calendar.gif',
   xpChallenge: '/assets/animations/xp_challenge.gif',
   easterEgg: '/assets/animations/easter_egg.gif',
   masteryQuiz: '/assets/animations/mastery_quiz.gif',
   crownDuo: '/assets/animations/crown_duo.gif',
-  // New Lottie Animations (dotLottie format)
-  logoAnimation: '/assets/animations/Duolingo Logo Animation.lottie',
-  duoAttack: '/assets/animations/Duo Attack.lottie',
-  learningHowToAnimate: '/assets/animations/Learning how to animate.lottie',
 };
 
 export const animationMeta = {
   duoMagic: 'Duo as Maleficent with floating magic.',
   muddyBuddy: 'Falstaff the bear in a yellow raincoat.',
-  parkRanger: 'Lily running in a park ranger hat.',
   streakCalendar: 'Animated calendar showing streak fire.',
   xpChallenge: 'UI animation for the XP challenge.',
   easterEgg: 'An egg cracking to reveal the Duolingo logo.',
   masteryQuiz: 'Animation of the Mastery Quiz UI.',
   crownDuo: 'Duo wearing a crown and celebrating.',
-  logoAnimation: 'Duolingo Logo Splash Animation.',
-  duoAttack: 'Duo Attack animation for starting tests.',
-  learningHowToAnimate: 'Learning how to animate loop for unit dividers.',
 };

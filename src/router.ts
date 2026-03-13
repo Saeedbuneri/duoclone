@@ -36,7 +36,16 @@ export class Router {
             overlay.classList.add('lesson-loading');
             overlay.innerHTML = `
                 <div class="loading-screen-content">
-                    <img src="/assets/animations/park_ranger.gif" style="width: 150px; margin-bottom: 30px; border-radius: 20px;" alt="Loading..." />
+                    <div style="width: 280px; height: 280px; margin: 0 auto;">
+                      <dotlottie-player
+                        src="https://lottie.host/6bfc812a-9a96-4358-a975-eb8776f0b55a/KMnuPmNy2L.lottie"
+                        background="transparent"
+                        speed="1"
+                        style="width: 100%; height: 100%;"
+                        loop
+                        autoplay
+                      ></dotlottie-player>
+                    </div>
                     <div class="loading-title">Getting your lesson ready...</div>
                     <div class="loading-progress-bar">
                         <div class="loading-progress-fill"></div>

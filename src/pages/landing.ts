@@ -9,8 +9,8 @@ export function LandingPage() {
         <header class="landing-header">
           <div class="landing-header-inner">
             <div class="landing-logo" onclick="window.__router.navigate('/learn')" style="cursor:pointer">
-              <img src="/duo-icon.svg" alt="Dicto" style="width:40px;height:40px;"/>
-              <span class="landing-logo-text">dicto</span>
+              <img src="/duo-icon.svg" alt="Duolingo" style="width:40px;height:40px;"/>
+              <span class="landing-logo-text">duolingo</span>
             </div>
             <nav class="landing-header-nav">
               <button class="btn-landing-outline" onclick="window.__router.navigate('/login')">LOG IN</button>
@@ -103,7 +103,7 @@ export function LandingPage() {
           <div class="landing-feature">
             <div class="landing-feature-text">
               <h2 class="landing-feature-title">free. fun. effective.</h2>
-              <p class="landing-feature-desc">Learning with Dicto is fun, and <a href="#" style="color:#58CC02;font-weight:700">research shows that it works!</a> With quick, bite-sized lessons, you'll earn points and unlock new levels while gaining real-world communication skills.</p>
+              <p class="landing-feature-desc">Learning with Duolingo is fun, and <a href="#" style="color:#58CC02;font-weight:700">research shows that it works!</a> With quick, bite-sized lessons, you'll earn points and unlock new levels while gaining real-world communication skills.</p>
             </div>
             <div class="landing-feature-img">
               <div class="landing-feature-illustration feature-illust-1">
@@ -219,7 +219,7 @@ export function LandingPage() {
                 <div class="mockup-screen">
                   <div style="display:flex;align-items:center;gap:6px;padding:8px;border-bottom:1px solid #E5E5E5">
                     <img src="/duo-icon.svg" width="20" height="20" alt=""/>
-                    <span style="font-weight:800;font-size:11px;color:#58CC02">dicto</span>
+                    <span style="font-weight:800;font-size:11px;color:#58CC02">duolingo</span>
                   </div>
                   <div class="mockup-path">
                     <div class="mockup-node active-node">⭐</div>
@@ -248,8 +248,8 @@ export function LandingPage() {
           <div class="footer-container">
             <div class="footer-top">
               <div class="footer-logo">
-                <img src="/duo-icon.svg" alt="Dicto" width="32" height="32"/>
-                <span style="font-size:20px;font-weight:800;color:#58CC02;letter-spacing:-0.5px">dicto</span>
+                <img src="/duo-icon.svg" alt="Duolingo" width="32" height="32"/>
+                <span style="font-size:20px;font-weight:800;color:#58CC02;letter-spacing:-0.5px">duolingo</span>
               </div>
             </div>
             <div class="footer-row">
@@ -267,24 +267,24 @@ export function LandingPage() {
               <div class="footer-col">
                 <h3>Products</h3>
                 <ul>
-                  <li><a href="#" onclick="window.__router.navigate('/login')">Dicto</a></li>
-                  <li><a href="#" onclick="window.__router.navigate('/login')">Dicto for Schools</a></li>
+                  <li><a href="#" onclick="window.__router.navigate('/login')">Duolingo</a></li>
+                  <li><a href="#" onclick="window.__router.navigate('/login')">Duolingo for Schools</a></li>
                   <li><a href="#" onclick="window.__router.navigate('/login')">English Test</a></li>
-                  <li><a href="#" onclick="window.__router.navigate('/super')">Super Dicto</a></li>
-                  <li><a href="#" onclick="window.__router.navigate('/super')">Dicto Max</a></li>
+                  <li><a href="#" onclick="window.__router.navigate('/super')">Super Duolingo</a></li>
+                  <li><a href="#" onclick="window.__router.navigate('/super')">Duolingo Max</a></li>
                 </ul>
               </div>
               <div class="footer-col">
                 <h3>Apps</h3>
                 <ul>
-                  <li><a href="#" onclick="duoAlert('Redirecting to Google Play Store...', '📱', 'OK')">Dicto for Android</a></li>
-                  <li><a href="#" onclick="duoAlert('Redirecting to App Store...', '🍎', 'OK')">Dicto for iOS</a></li>
+                  <li><a href="#" onclick="duoAlert('Redirecting to Google Play Store...', '📱', 'OK')">Duolingo for Android</a></li>
+                  <li><a href="#" onclick="duoAlert('Redirecting to App Store...', '🍎', 'OK')">Duolingo for iOS</a></li>
                 </ul>
               </div>
               <div class="footer-col">
                 <h3>Help & Support</h3>
                 <ul>
-                  <li><a href="#" onclick="duoAlert('Help center is currently under maintenance.', '🛠️', 'OK')">Dicto FAQs</a></li>
+                  <li><a href="#" onclick="duoAlert('Help center is currently under maintenance.', '🛠️', 'OK')">Duolingo FAQs</a></li>
                   <li><a href="#" onclick="duoAlert('Help center is currently under maintenance.', '🛠️', 'OK')">Schools FAQs</a></li>
                   <li><a href="#" onclick="duoAlert('Status: All Systems Operational', '🟢', 'OK')">Status</a></li>
                 </ul>
@@ -340,7 +340,7 @@ export function LandingPage() {
             </div>
 
             <div class="footer-bottom">
-              <p style="color:#AFAFAF;font-size:12px;text-align:center">© 2025 Dicto. All rights reserved.</p>
+              <p style="color:#AFAFAF;font-size:12px;text-align:center">© 2025 Duolingo. All rights reserved.</p>
             </div>
           </div>
         </footer>
