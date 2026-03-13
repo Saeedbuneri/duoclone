@@ -30,15 +30,13 @@ export function SettingsPage() {
       </div>
 
       <!-- Hero Animation Section -->
-      <div class="animate-in" style="animation-delay: 0.08s; width: 100%; max-width: 600px; height: 320px; margin: 24px auto; background: var(--duo-gray-100); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid var(--duo-gray-200);">
-        <dotlottie-player
+      <div id="settings-hero-animation" class="animate-in" style="animation-delay: 0.08s; width: 100%; max-width: 600px; height: 320px; margin: 24px auto; background: var(--duo-gray-100); border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 2px solid var(--duo-gray-200);">
+        <dotlottie-wc
           src="https://lottie.host/f260671d-2e0a-4fa3-b025-3469f78e5266/wxTSEn7e0x.lottie"
-          background="transparent"
-          speed="1"
           style="width: 100%; height: 100%; transform: scale(1.1);"
           loop
           autoplay
-        ></dotlottie-player>
+        ></dotlottie-wc>
       </div>
 
       <div class="settings-section animate-in" style="animation-delay:0.1s">

@@ -4268,3 +4268,158 @@ ul {
 }
 
 
+
+/* ===== MOBILE RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+  /* Sidebar -> Bottom Nav Bar */
+  .sidebar {
+    width: 100%;
+    height: 72px;
+    flex-direction: row;
+    top: auto;
+    bottom: 0;
+    border-right: none;
+    border-top: 2px solid var(--duo-gray-200);
+    padding: 0 16px;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .sidebar-logo { display: none; }
+  .sidebar-nav { flex-direction: row; gap: 0; height: 100%; align-items: center; justify-content: space-around; }
+  .nav-item { 
+    flex-direction: column; 
+    height: auto; 
+    padding: 8px; 
+    gap: 4px; 
+    width: auto;
+    border-radius: 8px;
+  }
+  .nav-text { display: none; }
+  .nav-icon { width: 32px; height: 32px; }
+  .sidebar-footer { display: none; }
+
+  /* App Layout Adjustments */
+  .main-content { margin-left: 0; padding-bottom: 72px; }
+  .content-split { flex-direction: column; }
+  .right-panel { display: none; }
+  .content-area { padding: 0 16px 40px; }
+
+  /* Top Bar (Mobile Mode) */
+  .top-stats {
+    position: sticky;
+    top: 0;
+    background: var(--duo-white);
+    z-index: 100;
+    padding: 12px 16px;
+    margin-bottom: 0;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--duo-gray-200);
+  }
+
+  /* Learning Path */
+  .section-header { 
+    top: 56px; /* Below Top Bar */
+    border-radius: 0; 
+    margin: 0 -16px 20px -16px; 
+    padding: 16px; 
+    min-height: auto;
+  }
+  .section-character { display: none; }
+  .section-header-info h3 { font-size: 18px; }
+
+  /* Path Nodes */
+  .path-node:nth-child(3n+2) { transform: translateX(-30px); }
+  .path-node:nth-child(3n+3) { transform: translateX(30px); }
+
+  /* Lesson Page */
+  .lesson-header { padding: 12px 16px; gap: 12px; }
+  .lesson-layout-container { flex-direction: column; padding: 20px 16px 120px; align-items: center; gap: 30px; min-height: auto; }
+  .lesson-mascot-sidebar { flex: 0 0 auto; flex-direction: row; align-items: center; gap: 16px; padding-bottom: 0; }
+  .mascot-img { width: 100px; height: 100px; }
+  .mascot-bubble-side { margin-bottom: 0; max-width: 240px; }
+  .bubble-tip, .bubble-tip-inner { left: -10px; right: auto; top: 50%; transform: translateY(-50%) rotate(90deg); bottom: auto; }
+  .lesson-question { font-size: 22px; text-align: center; }
+  .lesson-options { grid-template-columns: 1fr; }
+  .lesson-content { align-items: center; }
+  .lesson-footer { padding: 20px 16px; }
+  .lesson-footer-inner { flex-direction: column; gap: 12px; }
+  .lesson-footer .btn { width: 100%; }
+
+  /* Onboarding */
+  .onboarding-content { padding: 20px 16px 140px; }
+  .onboarding-mascot { gap: 12px; }
+  .onboarding-mascot svg { width: 70px; }
+  .mascot-bubble { font-size: 16px; }
+  .lang-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* Additional Mobile UI Tweaks */
+@media (max-width: 768px) {
+  .mobile-top-bar { 
+    display: block !important; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    background: white; 
+    border-bottom: 2px solid var(--duo-gray-200);
+  }
+  .mobile-top-bar .top-stats { 
+    padding: 12px 16px; 
+    margin: 0;
+    justify-content: space-between;
+  }
+  .content-area .top-stats {
+    display: none;
+  }
+}
+
+/* Final Mobile Polish for Sections and Profile */
+@media (max-width: 768px) {
+  .section-card-main { max-width: 100%; padding: 24px; }
+  .section-mascot-container { display: none; }
+  .profile-stats-row { flex-wrap: wrap; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .profile-stat { width: 100%; }
+  .profile-header-section { text-align: center; }
+  .profile-actions { justify-content: center; }
+  .sections-page { padding-bottom: 20px; }
+  .sections-list { padding: 12px 16px; }
+  .btn-sm { min-width: 100px; padding: 10px; }
+}
+
+/* Comprehensive Mobile Responsiveness Fixes */
+@media (max-width: 768px) {
+  /* Landing Page Fixes */
+  .landing-hero { padding: 40px 16px; }
+  .landing-hero-owl { width: 140px; }
+  .landing-feature { gap: 20px; text-align: center; }
+  .landing-feature-img { max-width: 200px; margin: 0 auto; }
+  .landing-tagline { font-size: 22px; }
+
+  /* Shop Page Fixes */
+  .shop-item { flex-direction: column; text-align: center; gap: 12px; align-items: center; padding: 20px 12px; }
+  .item-price { width: 100%; max-width: 140px; }
+  .shop-header { padding: 16px; }
+
+  /* Settings Page Fixes */
+  .settings-page { padding: 16px; }
+  .setting-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .setting-row input, .setting-row select { text-align: left !important; width: 100%; border-bottom: 2px solid var(--duo-gray-200) !important; border-radius: 0; padding-bottom: 4px; }
+  #hero-animation-container { height: 200px !important; margin: 12px auto !important; }
+  dotlottie-wc { transform: scale(1) !important; }
+
+  /* Modal Fixes */
+  .modal-content { width: 90% !important; margin: 20px auto; }
+
+  /* Layout Tweak: Content Area padding */
+  .content-area { padding: 12px 16px 80px; }
+
+  /* Navigation: Ensure bottom nav icons are correctly sized */
+  .nav-item .nav-icon { width: 28px; height: 28px; }
+  .nav-item.active { border-width: 0; border-bottom: 4px solid var(--duo-blue); border-radius: 0; background: none; }
+}
+
+@media (max-width: 768px) {
+  #settings-hero-animation { height: 200px !important; margin: 12px auto !important; }
+}

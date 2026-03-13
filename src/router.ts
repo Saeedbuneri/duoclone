@@ -37,14 +37,12 @@ export class Router {
             overlay.innerHTML = `
                 <div class="loading-screen-content">
                     <div style="width: 280px; height: 280px; margin: 0 auto;">
-                      <dotlottie-player
+                      <dotlottie-wc
                         src="https://lottie.host/6bfc812a-9a96-4358-a975-eb8776f0b55a/KMnuPmNy2L.lottie"
-                        background="transparent"
-                        speed="1"
                         style="width: 100%; height: 100%;"
                         loop
                         autoplay
-                      ></dotlottie-player>
+                      ></dotlottie-wc>
                     </div>
                     <div class="loading-title">Getting your lesson ready...</div>
                     <div class="loading-progress-bar">

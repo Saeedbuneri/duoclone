@@ -110,6 +110,10 @@ export function AppLayout(activePage: string, content: string, rightPanel: strin
     <div class="app-layout">
       ${Sidebar(activePage)}
       <div class="main-content">
+        <!-- Mobile Top Bar -->
+        <div class="mobile-top-bar" style="display: none;">
+          ${TopStats()}
+        </div>
         <div class="content-split">
           <div class="content-area">
             ${content}
