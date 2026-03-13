@@ -1,5 +1,5 @@
 import './style.css';
-import '@lottiefiles/lottie-player';
+import '@dotlottie/player-component';
 import { animations } from './animations';
 import { Router } from './router';
 import { LandingPage } from './pages/landing';
@@ -56,7 +56,7 @@ router.start();
 const loader = document.getElementById('initial-loader');
 if (loader) {
   loader.innerHTML = `
-    <lottie-player src="${animations.logoAnimation}" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+    <dotlottie-player src="${animations.logoAnimation}" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
     <div style="font-family:'Nunito',sans-serif;font-size:32px;font-weight:800;color:#58CC02;letter-spacing:-0.5px;margin-top:-40px;">dicto</div>
   `;
   setTimeout(() => {

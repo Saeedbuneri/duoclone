@@ -7,10 +7,10 @@ export const animations = {
   easterEgg: '/assets/animations/easter_egg.gif',
   masteryQuiz: '/assets/animations/mastery_quiz.gif',
   crownDuo: '/assets/animations/crown_duo.gif',
-  // New Lottie Animations
-  logoAnimation: '/src/animations/Duolingo Logo Animation.lottie',
-  duoAttack: '/src/animations/Duo Attack.lottie',
-  learningHowToAnimate: '/src/animations/Learning how to animate.lottie',
+  // New Lottie Animations (dotLottie format)
+  logoAnimation: '/assets/animations/Duolingo Logo Animation.lottie',
+  duoAttack: '/assets/animations/Duo Attack.lottie',
+  learningHowToAnimate: '/assets/animations/Learning how to animate.lottie',
 };
 
 export const animationMeta = {

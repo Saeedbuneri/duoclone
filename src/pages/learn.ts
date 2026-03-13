@@ -153,7 +153,7 @@ export function LearnPage() {
         </div>
         
         <div class="section-lottie-container" style="position: absolute; right: -20px; top: -10px; width: 140px; height: 140px; transform: rotate(45deg); opacity: 0.9; pointer-events: none;">
-          <lottie-player src="${animations.learningHowToAnimate}" background="transparent" speed="0.8" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+          <dotlottie-player src="${animations.learningHowToAnimate}" background="transparent" speed="0.8" style="width: 100%; height: 100%;" loop autoplay></dotlottie-player>
         </div>
 
         <button class="guidebook-btn" onclick="showGuidebook(${unit.unit}, '${unit.title.replace(/'/g, "\\'")}', '${unit.color}')" style="position:relative; z-index:2;">
@@ -352,7 +352,7 @@ export function LearnPage() {
         if (modalContainer) {
           modalContainer.innerHTML = `
             <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 10000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease;">
-              <lottie-player src="${animations.duoAttack}" background="transparent" speed="1.2" style="width: 400px; height: 400px;" autoplay></lottie-player>
+              <dotlottie-player src="${animations.duoAttack}" background="transparent" speed="1.2" style="width: 400px; height: 400px;" autoplay></dotlottie-player>
             </div>
           `;
           

@@ -21,7 +21,7 @@ export function Sidebar(activePage: string) {
   return `
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-logo" onclick="window.__router.navigate('/learn')" style="padding: 24px 20px; height: 100px; display: flex; align-items: center; gap: 8px;">
-        <lottie-player src="${animations.logoAnimation}" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></lottie-player>
+        <dotlottie-player src="${animations.logoAnimation}" background="transparent" speed="1" style="width: 50px; height: 50px;" loop autoplay></dotlottie-player>
         <div style="font-family:'Nunito',sans-serif;font-size:24px;font-weight:800;color:#58CC02;letter-spacing:-0.5px;">dicto</div>
       </div>
       <nav class="sidebar-nav">
