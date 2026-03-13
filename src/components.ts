@@ -108,12 +108,12 @@ export function TopStats() {
 export function AppLayout(activePage: string, content: string, rightPanel: string = '') {
   return `
     <div class="app-layout">
+      <!-- Mobile Top Bar -->
+      <div class="mobile-top-bar" style="display: none;">
+        ${TopStats()}
+      </div>
       ${Sidebar(activePage)}
       <div class="main-content">
-        <!-- Mobile Top Bar -->
-        <div class="mobile-top-bar" style="display: none;">
-          ${TopStats()}
-        </div>
         <div class="content-split">
           <div class="content-area">
             ${content}
